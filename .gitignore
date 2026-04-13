@@ -1,0 +1,42 @@
+# ---- Secrets ----
+# Ignore all env files, but keep example templates committed.
+.env
+.env.*
+!.env.example
+!.env.local.example
+
+# ---- OS / editor ----
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
+!.vscode/extensions.json
+
+# ---- Logs ----
+*.log
+logs/
+
+# ---- Node (web/) ----
+node_modules/
+.next/
+out/
+build/
+coverage/
+*.tsbuildinfo
+
+# ---- Go (scraper/) ----
+# Compiled binaries
+/scraper/scraper
+/scraper/bin/
+*.exe
+*.test
+*.out
+
+# ---- Vercel ----
+.vercel/
+
+# ---- Local DB dumps / scratch ----
+*.dump
+*.sql.bak

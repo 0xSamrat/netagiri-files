@@ -104,7 +104,6 @@ Before completing any task:
 
 Read the relevant doc before working on that area:
 - `PLAN.md` — 9-phase implementation roadmap with file paths and verify steps
-- `neta-watch-claude-code-prompt.md` — Original feature spec with all requirements
 
 ## DB Schema (quick ref)
 
