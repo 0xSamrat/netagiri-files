@@ -51,18 +51,33 @@ var (
 	totalCasesRE = regexp.MustCompile(`Number of Criminal Cases:\s*<span[^>]*>\s*(\d+)\s*</span>`)
 )
 
-// ParseListPage extracts distinct candidate refs from a winners summary page.
-// De-duplicates on myneta_id because each row wraps two nested <a> tags.
-func ParseListPage(body []byte, basePath string) ([]models.CandidateRef, error) {
+// ParseListPage is kept for interface compatibility but is no longer used.
+// Lok Sabha 2024 list pages render their tables via obfuscated JavaScript,
+// so we now discover candidates via constituency pages instead.
+// Returns an empty slice without error.
+func ParseListPage(_ []byte, _ string) ([]models.CandidateRef, error) {
+	return nil, nil
+}
+
+// ParseConstituencyPage extracts the winner's candidate ref from a static
+// constituency candidates page (?action=show_candidates&constituency_id=N).
+// Each constituency has exactly one winner, marked with "Winner" in the row.
+func ParseConstituencyPage(body []byte, basePath string) (models.CandidateRef, bool) {
 	doc, err := goquery.NewDocumentFromReader(bytes.NewReader(body))
 	if err != nil {
-		return nil, fmt.Errorf("parse list html: %w", err)
+		return models.CandidateRef{}, false
 	}
 
-	seen := make(map[int]bool)
-	var refs []models.CandidateRef
-
+	var found models.CandidateRef
 	doc.Find(`a[href*="candidate.php?candidate_id="]`).Each(func(_ int, s *goquery.Selection) {
+		if found.MyNetaID != 0 {
+			return // already found
+		}
+		// The winner row contains a <font color=green> sibling with "Winner"
+		parent := s.Parent()
+		if !strings.Contains(parent.Text(), "Winner") {
+			return
+		}
 		href, ok := s.Attr("href")
 		if !ok {
 			return
@@ -72,17 +87,16 @@ func ParseListPage(body []byte, basePath string) ([]models.CandidateRef, error) 
 			return
 		}
 		id, err := strconv.Atoi(m[1])
-		if err != nil || seen[id] {
+		if err != nil || id == 0 {
 			return
 		}
-		seen[id] = true
-		refs = append(refs, models.CandidateRef{
+		found = models.CandidateRef{
 			MyNetaID: id,
 			URL:      fmt.Sprintf("%s/candidate.php?candidate_id=%d", strings.TrimRight(basePath, "/"), id),
-		})
+		}
 	})
 
-	return refs, nil
+	return found, found.MyNetaID != 0
 }
 
 // ParseCandidatePage extracts a Politician from a candidate detail page.

@@ -17,7 +17,7 @@ import (
 
 const (
 	userAgent      = "NetaWatchScraper/1.0 (+civic transparency; contact via github.com/samratmukherjee/netawatch)"
-	defaultTimeout = 90 * time.Second
+	defaultTimeout = 3 * time.Minute
 	maxRetries     = 3
 )
 
