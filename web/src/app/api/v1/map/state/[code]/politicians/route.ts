@@ -6,7 +6,7 @@ export const runtime = "nodejs";
 export const revalidate = 3600;
 
 const schema = z.object({
-  house: z.enum(["lok_sabha", "rajya_sabha"]).default("lok_sabha"),
+  house: z.literal("lok_sabha").default("lok_sabha"),
   page: z.coerce.number().int().positive().default(1),
   page_size: z.coerce.number().int().min(1).max(100).default(20),
 });

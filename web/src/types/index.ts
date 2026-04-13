@@ -1,4 +1,4 @@
-export type House = "lok_sabha" | "rajya_sabha";
+export type House = "lok_sabha";
 
 export interface PoliticianSummary {
   id: number;
@@ -63,7 +63,6 @@ export interface StateStat {
 
 export interface OverviewStats {
   lok_sabha_with_cases: number;
-  rajya_sabha_with_cases: number;
   total_serious_cases: number;
   total_convicted: number;
 }

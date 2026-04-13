@@ -13,7 +13,7 @@ export interface PoliticianFilters {
 }
 
 export function usePoliticians(filters: PoliticianFilters) {
-  const base = filters.house === "lok_sabha" ? "lok-sabha" : "rajya-sabha";
+  const base = "lok-sabha";
   return useQuery<Paginated<PoliticianSummary>>({
     queryKey: ["politicians", filters],
     queryFn: async () => {
@@ -31,7 +31,7 @@ export function usePoliticians(filters: PoliticianFilters) {
 }
 
 export function useBubbleData(house: House) {
-  const base = house === "lok_sabha" ? "lok-sabha" : "rajya-sabha";
+  const base = "lok-sabha";
   return useQuery<PoliticianSummary[]>({
     queryKey: ["bubble-data", house],
     queryFn: async () => {

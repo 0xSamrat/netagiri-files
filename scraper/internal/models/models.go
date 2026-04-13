@@ -4,8 +4,7 @@ package models
 type House string
 
 const (
-	HouseLokSabha   House = "lok_sabha"
-	HouseRajyaSabha House = "rajya_sabha"
+	HouseLokSabha House = "lok_sabha"
 )
 
 // Politician is the canonical scraped record. Keyed on MyNetaID for upsert.

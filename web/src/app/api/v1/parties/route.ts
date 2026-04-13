@@ -6,7 +6,7 @@ export const runtime = "nodejs";
 export const revalidate = 3600;
 
 const schema = z.object({
-  house: z.enum(["lok_sabha", "rajya_sabha"]).default("lok_sabha"),
+  house: z.literal("lok_sabha").default("lok_sabha"),
 });
 
 export async function GET(req: NextRequest) {

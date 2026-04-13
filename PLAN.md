@@ -12,10 +12,9 @@
 | 4. API Routes | ⬜ Not started | 1.5 hr |
 | 5. Lok Sabha View | ⬜ Not started | 2 hr |
 | 6. Politician Page | ⬜ Not started | 1.5 hr |
-| 7. Rajya Sabha | ⬜ Not started | 30 min |
-| 8. India Map | ⬜ Not started | 1.5 hr |
-| 9. Homepage & Polish | ⬜ Not started | 1.5 hr |
-| 10. Deployment | ⬜ Not started | 30 min |
+| 7. India Map | ⬜ Not started | 1.5 hr |
+| 8. Homepage & Polish | ⬜ Not started | 1.5 hr |
+| 9. Deployment | ⬜ Not started | 30 min |
 
 Status: ⬜ Not started | 🔄 In progress | ✅ Complete | ⏸️ Blocked
 
@@ -48,7 +47,7 @@ _No progress yet._
 - ❌ User-submitted data or crowdsourcing
 - ❌ Real-time updates / WebSockets
 - ❌ Mobile app (web-only)
-- ❌ State assembly data (Lok Sabha + Rajya Sabha only)
+- ❌ State assembly data (Lok Sabha only)
 - ❌ Historical election data (current term only)
 - ❌ Automated scraper scheduling (manual run only)
 - ❌ Multi-language support (English only for MVP)
@@ -478,11 +477,8 @@ export async function GET() {
 
 Create remaining routes:
 - `api/v1/stats/lok-sabha/route.ts`
-- `api/v1/stats/rajya-sabha/route.ts`
 - `api/v1/lok-sabha/bubble-data/route.ts`
 - `api/v1/lok-sabha/politicians/route.ts` (with Zod validation for query params)
-- `api/v1/rajya-sabha/bubble-data/route.ts`
-- `api/v1/rajya-sabha/politicians/route.ts`
 - `api/v1/politicians/[id]/route.ts`
 - `api/v1/map/state-stats/route.ts`
 - `api/v1/map/state/[code]/politicians/route.ts`
@@ -622,25 +618,7 @@ export default async function PoliticianPage({ params }: { params: { id: string 
 
 ---
 
-## Phase 7 — Rajya Sabha (30 min)
-
-### 7.1 Scrape RS Data (15 min)
-
-```bash
-go run ./cmd/scraper -house=rajya_sabha -concurrency=5
-psql $SUPABASE_DB_URL -c "SELECT COUNT(*) FROM politicians WHERE house='rajya_sabha'"
-# Should return ~245
-```
-
-### 7.2 RS Page (15 min)
-
-Create `web/src/app/rajya-sabha/page.tsx` — reuse all Lok Sabha components, just change `house` param in API calls.
-
-**Verify**: `/rajya-sabha` mirrors `/lok-sabha` with RS data
-
----
-
-## Phase 8 — India Map (1.5 hr)
+## Phase 7 — India Map (1.5 hr)
 
 ### 8.1 TopoJSON File (10 min)
 
@@ -682,14 +660,14 @@ Create `web/src/app/map/page.tsx`:
 
 ---
 
-## Phase 9 — Homepage & Polish (1.5 hr)
+## Phase 8 — Homepage & Polish (1.5 hr)
 
 ### 9.1 Homepage (30 min)
 
 Create `web/src/app/page.tsx`:
 - 4 StatsCards
 - SearchBox (debounced)
-- 3 navigation cards to LS/RS/Map
+- 2 navigation cards to LS/Map
 
 ### 9.2 Static Pages (20 min)
 
@@ -739,7 +717,7 @@ export function Footer() {
 
 ---
 
-## Phase 10 — Deployment (30 min)
+## Phase 9 — Deployment (30 min)
 
 ### 10.1 Vercel Setup (15 min)
 
@@ -783,11 +761,10 @@ jobs:
 
 Before marking project complete:
 
-- [ ] `SELECT COUNT(*) FROM politicians` returns ~788
+- [ ] `SELECT COUNT(*) FROM politicians` returns ~545
 - [ ] Homepage shows correct stats
 - [ ] Search finds "Modi" and "Rahul"
 - [ ] Lok Sabha bubble chart interactive
-- [ ] Rajya Sabha table paginates
 - [ ] Politician detail shows case breakdown
 - [ ] Map choropleth colors correctly
 - [ ] Map click shows state panel

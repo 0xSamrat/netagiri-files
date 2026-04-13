@@ -19,7 +19,6 @@ npm run lint                   # Must pass before commit
 
 # Scraper (from scraper/)
 go run ./cmd/scraper -house=lok_sabha -concurrency=5
-go run ./cmd/scraper -house=rajya_sabha -concurrency=5
 go run ./cmd/scraper -dry-run  # Parse without DB write
 
 # DB
@@ -34,7 +33,6 @@ web/src/
 ├── app/
 │   ├── api/v1/           # REST endpoints (GET only)
 │   ├── lok-sabha/        # Bubble chart + ranking table
-│   ├── rajya-sabha/      # Same components, different house
 │   ├── map/              # D3 choropleth
 │   └── politician/[id]/  # Individual detail page
 ├── components/

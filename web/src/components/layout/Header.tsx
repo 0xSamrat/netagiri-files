@@ -11,9 +11,6 @@ export function Header() {
           <Link href="/lok-sabha" className="hover:text-indigo-600 whitespace-nowrap">
             Lok Sabha
           </Link>
-          <Link href="/rajya-sabha" className="hover:text-indigo-600 whitespace-nowrap">
-            Rajya Sabha
-          </Link>
           <Link href="/map" className="hover:text-indigo-600 whitespace-nowrap">
             Map
           </Link>
