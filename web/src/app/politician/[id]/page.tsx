@@ -40,17 +40,18 @@ export default async function PoliticianPage({ params }: PageProps) {
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-5">
-      {/* Breadcrumb */}
-      <nav className="text-xs text-gray-400 flex items-center gap-1.5">
-        <Link href="/" className="hover:text-gray-700">
+      <nav className="text-[11px] uppercase tracking-wider text-slate-500 flex items-center gap-2">
+        <Link href="/" className="hover:text-[#ff2d87] transition-colors">
           Home
         </Link>
-        <span>/</span>
-        <Link href={houseHref} className="hover:text-gray-700">
+        <span className="text-slate-700">/</span>
+        <Link href={houseHref} className="hover:text-[#ff2d87] transition-colors">
           {houseLabel}
         </Link>
-        <span>/</span>
-        <span className="text-gray-600 truncate">{politician.name}</span>
+        <span className="text-slate-700">/</span>
+        <span className="text-slate-300 truncate normal-case tracking-normal">
+          {politician.name}
+        </span>
       </nav>
 
       <ProfileHeader politician={politician} />
@@ -74,15 +75,14 @@ export default async function PoliticianPage({ params }: PageProps) {
         </div>
       </div>
 
-      {/* Data source note */}
-      <p className="text-xs text-gray-400 text-center pt-2">
+      <p className="text-xs text-slate-500 text-center pt-2">
         Data sourced from self-sworn affidavits submitted to the Election
         Commission of India via{" "}
         <a
           href="https://myneta.info"
           target="_blank"
           rel="noopener noreferrer"
-          className="underline hover:text-gray-600"
+          className="underline hover:text-[#ff2d87] transition-colors"
         >
           myneta.info (ADR)
         </a>

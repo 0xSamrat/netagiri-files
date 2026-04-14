@@ -7,20 +7,18 @@ interface StatsCardProps {
 
 export function StatsCard({ label, value, sub, accent }: StatsCardProps) {
   return (
-    <div
-      className={`rounded-xl border p-4 flex flex-col gap-1 ${
-        accent ? "border-red-300 bg-red-50" : "border-gray-200 bg-white"
-      }`}
-    >
-      <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">
+    <div className="rounded-2xl border border-white/5 bg-[#0b0f23] p-5 flex flex-col gap-1 backdrop-blur-md">
+      <span className="text-[10px] font-semibold text-slate-500 uppercase tracking-[0.24em]">
         {label}
       </span>
       <span
-        className={`text-2xl font-bold ${accent ? "text-red-600" : "text-gray-900"}`}
+        className={`text-2xl font-bold tabular-nums ${
+          accent ? "text-[#ff2d87]" : "text-white"
+        }`}
       >
         {value}
       </span>
-      {sub && <span className="text-xs text-gray-400">{sub}</span>}
+      {sub && <span className="text-[10px] text-slate-500">{sub}</span>}
     </div>
   );
 }

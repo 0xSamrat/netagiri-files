@@ -37,7 +37,7 @@ export function StateDetailPanel({ stat, onClose }: StateDetailPanelProps) {
   }, [stat.code]);
 
   return (
-    <div className="rounded-2xl border border-white/10 bg-slate-950/60 backdrop-blur-md p-5 space-y-4 shadow-xl shadow-black/40">
+    <div className="rounded-2xl border border-white/5 bg-[#0b0f23] backdrop-blur-md p-5 space-y-4 shadow-xl shadow-black/40">
       {/* Header */}
       <div className="flex items-start justify-between gap-2">
         <div>
@@ -63,16 +63,16 @@ export function StateDetailPanel({ stat, onClose }: StateDetailPanelProps) {
             Total
           </div>
         </div>
-        <div className="rounded-lg px-2 py-2 bg-amber-500/10 border border-amber-500/20">
-          <div className="text-lg font-bold text-amber-300">
+        <div className="rounded-lg px-2 py-2 bg-[#ff2d87]/10 border border-[#ff2d87]/20">
+          <div className="text-lg font-bold text-[#ff2d87] tabular-nums">
             {stat.mps_with_cases}
           </div>
           <div className="text-[10px] uppercase tracking-wider text-slate-500">
             With Cases
           </div>
         </div>
-        <div className="rounded-lg px-2 py-2 bg-red-500/10 border border-red-500/20">
-          <div className="text-lg font-bold text-red-300">
+        <div className="rounded-lg px-2 py-2 bg-[#ff2d87]/10 border border-[#ff2d87]/20">
+          <div className="text-lg font-bold text-[#ff2d87] tabular-nums">
             {stat.pct_with_cases !== null ? `${stat.pct_with_cases}%` : "—"}
           </div>
           <div className="text-[10px] uppercase tracking-wider text-slate-500">
@@ -103,7 +103,7 @@ export function StateDetailPanel({ stat, onClose }: StateDetailPanelProps) {
                   className="flex items-center justify-between gap-2 rounded-lg px-3 py-2 hover:bg-white/5 group"
                 >
                   <div className="min-w-0">
-                    <div className="text-sm font-medium text-slate-200 truncate group-hover:text-blue-300">
+                    <div className="text-sm font-medium text-slate-200 truncate group-hover:text-[#ff2d87]">
                       {p.name}
                     </div>
                     <div className="text-xs text-slate-500">
@@ -111,8 +111,8 @@ export function StateDetailPanel({ stat, onClose }: StateDetailPanelProps) {
                     </div>
                   </div>
                   {p.total_cases > 0 && (
-                    <span className="flex-shrink-0 text-xs font-semibold text-amber-300 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-full">
-                      {p.total_cases} case{p.total_cases !== 1 ? "s" : ""}
+                    <span className="flex-shrink-0 text-[10px] font-semibold text-[#ff2d87] bg-[#ff2d87]/10 border border-[#ff2d87]/20 px-2 py-0.5 rounded-full tabular-nums">
+                      {p.total_cases}
                     </span>
                   )}
                 </Link>
@@ -124,8 +124,8 @@ export function StateDetailPanel({ stat, onClose }: StateDetailPanelProps) {
 
       {/* View all link */}
       <Link
-        href={`/lok-sabha?state=${stat.code}`}
-        className="block text-center text-xs text-blue-300 hover:text-blue-200 font-medium pt-1"
+        href={`/?state=${stat.code}`}
+        className="block text-center text-xs text-[#ff2d87] hover:text-white font-medium pt-1"
       >
         View all MPs from {stat.name} →
       </Link>

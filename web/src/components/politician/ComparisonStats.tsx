@@ -18,38 +18,31 @@ function PercentileBar({
 }) {
   if (value === null) return null;
 
-  // High percentile = more cases than peers = bad
-  const color =
-    value >= 90
-      ? "bg-red-500"
-      : value >= 70
-        ? "bg-orange-400"
-        : value >= 40
-          ? "bg-yellow-400"
-          : "bg-green-400";
-
-  const textColor =
-    value >= 90
-      ? "text-red-700"
-      : value >= 70
-        ? "text-orange-700"
-        : value >= 40
-          ? "text-yellow-700"
-          : "text-green-700";
+  // Higher percentile = more cases than peers. Escalate from slate → pink.
+  const intensity = Math.min(1, Math.max(0, value / 100));
+  const fillColor = `rgba(255, 45, 135, ${0.25 + intensity * 0.65})`;
 
   return (
     <div>
-      <div className="flex justify-between items-baseline mb-1">
-        <span className="text-xs text-gray-500">{label}</span>
-        <span className={`text-sm font-bold ${textColor}`}>
+      <div className="flex justify-between items-baseline mb-1.5">
+        <span className="text-[10px] uppercase tracking-[0.18em] text-slate-500">
+          {label}
+        </span>
+        <span className="text-sm font-bold text-white tabular-nums">
           {value.toFixed(0)}
-          <span className="text-xs font-normal">th percentile</span>
+          <span className="text-[10px] font-normal text-slate-500 ml-0.5">
+            th pct
+          </span>
         </span>
       </div>
-      <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+      <div className="h-1.5 w-full rounded-full bg-white/5 overflow-hidden">
         <div
-          className={`h-full rounded-full transition-all ${color}`}
-          style={{ width: `${value}%` }}
+          className="h-full rounded-full transition-all"
+          style={{
+            width: `${value}%`,
+            background: fillColor,
+            boxShadow: value >= 70 ? `0 0 8px ${fillColor}` : undefined,
+          }}
         />
       </div>
     </div>
@@ -72,32 +65,35 @@ export function ComparisonStats({
   if (!hasAny) return null;
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-200 p-6">
-      <h2 className="text-base font-semibold text-gray-900 mb-1">
-        How They Compare
-      </h2>
-      <p className="text-xs text-gray-400 mb-5">
-        Percentile rank by total criminal cases declared —{" "}
-        <strong>higher = more cases than peers</strong>
+    <div className="rounded-2xl border border-white/5 bg-[#0b0f23] p-6 backdrop-blur-md">
+      <div className="flex items-center justify-between mb-1">
+        <span className="text-[10px] font-semibold text-slate-500 uppercase tracking-[0.24em]">
+          How They Compare
+        </span>
+        <span className="text-[9px] text-slate-600 uppercase tracking-wider">
+          by cases
+        </span>
+      </div>
+      <p className="text-xs text-slate-500 mb-5">
+        Higher percentile = more declared cases than peers
       </p>
 
       {totalCases === 0 && (
-        <p className="text-sm text-gray-500 mb-4">
-          This MP declared 0 criminal cases — ranked in the lower percentile
-          across all groups.
+        <p className="text-xs text-slate-500 mb-4">
+          0 cases declared — ranked in the lower percentile across all groups.
         </p>
       )}
 
       <div className="space-y-4">
         <PercentileBar
-          label={`vs ${partyName ?? "party"} MPs`}
+          label={`vs ${partyName ?? "party"}`}
           value={percentileParty}
         />
         <PercentileBar
-          label={`vs ${stateName ?? "state"} MPs`}
+          label={`vs ${stateName ?? "state"}`}
           value={percentileState}
         />
-        <PercentileBar label="vs all MPs nationally" value={percentileNational} />
+        <PercentileBar label="vs national" value={percentileNational} />
       </div>
     </div>
   );
