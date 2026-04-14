@@ -4,7 +4,38 @@
       "Bash(curl -s --max-time 15 \"https://www.myneta.info/rajyasabha2024/\")",
       "Bash(curl -s --max-time 15 \"https://www.myneta.info/\")",
       "Bash(ls /home/user1/Folder/programs/neta-watch/*.md)",
-      "Bash(ls /home/user1/Folder/programs/neta-watch/web/*.md)"
+      "Bash(ls /home/user1/Folder/programs/neta-watch/web/*.md)",
+      "Bash(gh api:*)",
+      "Bash(curl -s \"https://api.github.com/repos/datameet/maps/contents/States\")",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); [print\\(x['name']\\) for x in d]\")",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:github.com)",
+      "Bash(curl -s \"https://api.github.com/repos/deldersveld/topojson/contents/countries/india\")",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); [print\\(x['name'], x['download_url']\\) for x in d]\")",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(type\\(d\\)\\); print\\(d\\)\")",
+      "Bash(curl -s \"https://api.github.com/search/repositories?q=india+states+topojson&sort=stars\")",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); [print\\(x['full_name'], x['stargazers_count']\\) for x in d.get\\('items',[]\\)[:8]]\")",
+      "Bash(curl -sL \"https://raw.githubusercontent.com/Subhash9325/GeoJson-Data-of-Indian-States/master/Indian_States\")",
+      "Bash(python3 -c ':*)",
+      "Bash(node -e \"require\\('topojson-server'\\)\")",
+      "Bash(npx --yes mapshaper --version)",
+      "Bash(curl -sL \"https://raw.githubusercontent.com/Subhash9325/GeoJson-Data-of-Indian-States/master/Indian_States\" -o /tmp/india-states-raw.geojson)",
+      "Bash(npx mapshaper:*)",
+      "Bash(node -e \"require\\('topojson-client'\\); console.log\\('ok'\\)\")",
+      "Bash(node -e \"require\\('d3'\\); console.log\\('d3 ok'\\)\")",
+      "Bash(curl -s \"https://api.github.com/repos/udit-001/india-maps-data/contents\")",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); [print\\(x['name'], x['type']\\) for x in d]\")",
+      "Bash(curl -s \"https://api.github.com/repos/udit-001/india-maps-data/contents/topojson\")",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); [print\\(x['name'], x['size']\\) for x in d]\")",
+      "Bash(curl -s \"https://api.github.com/repos/udit-001/india-maps-data/contents/topojson/states\")",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); [print\\(x['name'], x['size']\\) for x in d[:5]]\")",
+      "Bash(curl -sL \"https://raw.githubusercontent.com/udit-001/india-maps-data/main/topojson/india.json\")",
+      "Bash(curl -sL \"https://raw.githubusercontent.com/udit-001/india-maps-data/main/topojson/india.json\" -o /home/user1/Folder/programs/neta-watch/web/public/india-states.json)",
+      "Bash(ls web/.env* scraper/.env*)",
+      "Bash(node /tmp/fix_ar.js)"
+    ],
+    "additionalDirectories": [
+      "/tmp"
     ]
   }
 }

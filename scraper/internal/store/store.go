@@ -178,9 +178,59 @@ func (s *Store) ensureState(ctx context.Context, tx pgx.Tx, code, name string) (
 	return id, nil
 }
 
-// deriveStateCode builds a short code from a full state name when the source
-// does not supply one. Example: "Uttar Pradesh" -> "UP".
+// stateCodeMap maps normalised state/UT names (lowercase, no extra spaces) to
+// their unambiguous ECI/ISO codes. This avoids collisions like
+// "Andhra Pradesh" and "Arunachal Pradesh" both deriving to "AP".
+var stateCodeMap = map[string]string{
+	"andaman and nicobar islands": "AN",
+	"andhra pradesh":              "AP",
+	"arunachal pradesh":           "AR",
+	"assam":                       "AS",
+	"bihar":                       "BR",
+	"chandigarh":                  "CH",
+	"chhattisgarh":                "CG",
+	"dadra and nagar haveli and daman and diu": "DN",
+	"dadra and nagar haveli":                   "DN",
+	"daman and diu":                            "DD",
+	"delhi":                                    "DL",
+	"goa":                                      "GA",
+	"gujarat":                                  "GJ",
+	"haryana":                                  "HR",
+	"himachal pradesh":                         "HP",
+	"jammu and kashmir":                        "JK",
+	"jammu & kashmir":                          "JK",
+	"jharkhand":                                "JH",
+	"karnataka":                                "KA",
+	"kerala":                                   "KL",
+	"ladakh":                                   "LA",
+	"lakshadweep":                              "LD",
+	"madhya pradesh":                           "MP",
+	"maharashtra":                              "MH",
+	"manipur":                                  "MN",
+	"meghalaya":                                "ML",
+	"mizoram":                                  "MZ",
+	"nagaland":                                 "NL",
+	"odisha":                                   "OD",
+	"puducherry":                               "PY",
+	"punjab":                                   "PB",
+	"rajasthan":                                "RJ",
+	"sikkim":                                   "SK",
+	"tamil nadu":                               "TN",
+	"telangana":                                "TS",
+	"tripura":                                  "TR",
+	"uttar pradesh":                            "UP",
+	"uttarakhand":                              "UK",
+	"west bengal":                              "WB",
+}
+
+// deriveStateCode returns the canonical ECI code for a state name.
+// Falls back to an acronym when the name is not in the lookup table.
 func deriveStateCode(name string) string {
+	normalised := strings.ToLower(strings.TrimSpace(name))
+	if code, ok := stateCodeMap[normalised]; ok {
+		return code
+	}
+	// Fallback: first letter of each word (may collide for unknown names).
 	fields := strings.Fields(name)
 	if len(fields) == 0 {
 		return ""
@@ -193,10 +243,9 @@ func deriveStateCode(name string) string {
 	}
 	var b strings.Builder
 	for _, f := range fields {
-		if f == "" {
-			continue
+		if f != "" {
+			b.WriteByte(f[0])
 		}
-		b.WriteByte(f[0])
 	}
 	code := strings.ToUpper(b.String())
 	if len(code) > 5 {
