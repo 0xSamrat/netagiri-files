@@ -146,24 +146,44 @@ export function BubbleChart({
 
     const defs = svg.append("defs");
 
-    // Per-bubble bloom filters + sphere gradients
+    // Per-bubble sphere + halo gradients
     laidOut.forEach((d, i) => {
       const [r, g, b] = hexToRgb(d.color);
 
-      // Bloom filter (colored glow)
-      const f = defs
-        .append("filter")
-        .attr("id", `bloom-${i}`)
-        .attr("x", "-150%")
-        .attr("y", "-150%")
-        .attr("width", "400%")
-        .attr("height", "400%");
-      f.append("feGaussianBlur")
-        .attr("stdDeviation", "14")
-        .attr("result", "blur");
-      const merge = f.append("feMerge");
-      merge.append("feMergeNode").attr("in", "blur");
-      merge.append("feMergeNode").attr("in", "SourceGraphic");
+      // Halo gradient: neon at the rim, fades to 0 with distance.
+      // Bubble radius sits at 50% of the halo circle, so the sphere surface
+      // is where the glow is hottest and it falls off outward.
+      const halo = defs
+        .append("radialGradient")
+        .attr("id", `halo-${i}`)
+        .attr("cx", "50%")
+        .attr("cy", "50%")
+        .attr("r", "50%");
+      halo
+        .append("stop")
+        .attr("offset", "0%")
+        .attr("stop-color", d.color)
+        .attr("stop-opacity", 0);
+      halo
+        .append("stop")
+        .attr("offset", "48%")
+        .attr("stop-color", d.color)
+        .attr("stop-opacity", 0.32);
+      halo
+        .append("stop")
+        .attr("offset", "55%")
+        .attr("stop-color", d.color)
+        .attr("stop-opacity", 0.22);
+      halo
+        .append("stop")
+        .attr("offset", "72%")
+        .attr("stop-color", d.color)
+        .attr("stop-opacity", 0.05);
+      halo
+        .append("stop")
+        .attr("offset", "100%")
+        .attr("stop-color", d.color)
+        .attr("stop-opacity", 0);
 
       // Volumetric gradient: dark core → neon rim
       const grad = defs
@@ -211,18 +231,17 @@ export function BubbleChart({
       .attr("stroke-width", 1)
       .attr("stroke-dasharray", "2 10");
 
-    // Neon halo (colored bloom per bubble)
+    // Neon halo with radial falloff (no Gaussian blur — gradient IS the falloff)
     const halo = svg
       .append("g")
       .selectAll("circle")
       .data(laidOut)
       .join("circle")
-      .attr("r", (d) => d.r + 10)
-      .attr("fill", (d) => d.color)
+      .attr("r", (d) => d.r * 1.55)
+      .attr("fill", (_d, i) => `url(#halo-${i})`)
       .attr("opacity", (d) =>
-        selectedParty && selectedParty !== d.party ? 0.05 : 0.35,
+        selectedParty && selectedParty !== d.party ? 0.15 : 1,
       )
-      .attr("filter", (_d, i) => `url(#bloom-${i})`)
       .attr("pointer-events", "none");
 
     const node = svg
