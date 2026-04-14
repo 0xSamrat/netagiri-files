@@ -14,6 +14,9 @@ interface FilterBarProps {
   currentSort: string;
 }
 
+const SELECT_CLS =
+  "text-xs rounded-full border border-white/10 bg-white/5 text-slate-200 px-3 py-2 hover:border-white/20 focus:outline-none focus:ring-2 focus:ring-violet-500/40 appearance-none";
+
 export function FilterBar({
   parties,
   states,
@@ -34,18 +37,18 @@ export function FilterBar({
       } else {
         params.delete(key);
       }
-      params.delete("page"); // reset pagination on filter change
+      params.delete("page");
       router.push(`${pathname}?${params.toString()}`);
     },
     [router, pathname, searchParams],
   );
 
   return (
-    <div className="flex flex-wrap gap-3 items-center p-4 bg-white rounded-xl border border-gray-200">
+    <div className="flex flex-wrap gap-2 items-center p-3 bg-[#0a0f24]/80 rounded-2xl border border-white/5 backdrop-blur-md">
       <select
         value={currentParty}
         onChange={(e) => update("party", e.target.value)}
-        className="text-sm rounded-lg border border-gray-300 px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-400"
+        className={SELECT_CLS}
       >
         <option value="">All Parties</option>
         {parties.map((p) => (
@@ -58,7 +61,7 @@ export function FilterBar({
       <select
         value={currentState}
         onChange={(e) => update("state", e.target.value)}
-        className="text-sm rounded-lg border border-gray-300 px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-400"
+        className={SELECT_CLS}
       >
         <option value="">All States</option>
         {states.map((s) => (
@@ -71,7 +74,7 @@ export function FilterBar({
       <select
         value={currentCrimeType}
         onChange={(e) => update("crime_type", e.target.value)}
-        className="text-sm rounded-lg border border-gray-300 px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-400"
+        className={SELECT_CLS}
       >
         <option value="all">All Cases</option>
         <option value="serious">Serious Cases Only</option>
@@ -80,7 +83,7 @@ export function FilterBar({
       <select
         value={currentSort}
         onChange={(e) => update("sort", e.target.value)}
-        className="text-sm rounded-lg border border-gray-300 px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-400"
+        className={SELECT_CLS}
       >
         <option value="total_cases">Sort: Total Cases</option>
         <option value="serious_cases">Sort: Serious Cases</option>

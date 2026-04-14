@@ -32,7 +32,14 @@
       "Bash(curl -sL \"https://raw.githubusercontent.com/udit-001/india-maps-data/main/topojson/india.json\")",
       "Bash(curl -sL \"https://raw.githubusercontent.com/udit-001/india-maps-data/main/topojson/india.json\" -o /home/user1/Folder/programs/neta-watch/web/public/india-states.json)",
       "Bash(ls web/.env* scraper/.env*)",
-      "Bash(node /tmp/fix_ar.js)"
+      "Bash(node /tmp/fix_ar.js)",
+      "Bash(npx tsc:*)",
+      "Bash(timeout 25 npx next dev --port 3456)",
+      "Bash(curl -s http://localhost:3456/api/v1/lok-sabha/bubble-data)",
+      "Bash(curl -s -o /tmp/page.html -w \"HTTP %{http_code}\\\\n\" http://localhost:3456/)",
+      "Bash(curl -s http://localhost:3000/api/v1/lok-sabha/bubble-data)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://localhost:3000/)",
+      "Bash(curl -s http://localhost:3000/)"
     ],
     "additionalDirectories": [
       "/tmp"

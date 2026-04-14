@@ -16,17 +16,17 @@ export function Pagination({ page, total, pageSize, onChange }: PaginationProps)
       <button
         onClick={() => onChange(page - 1)}
         disabled={page <= 1}
-        className="rounded px-3 py-1 text-sm border border-gray-300 disabled:opacity-40 hover:bg-gray-50"
+        className="rounded-full px-4 py-1.5 text-xs border border-white/10 bg-white/5 text-slate-300 hover:bg-white/10 hover:text-white disabled:opacity-30 disabled:hover:bg-white/5"
       >
         ← Prev
       </button>
-      <span className="text-sm text-gray-600">
+      <span className="text-xs text-slate-500 px-2">
         Page {page} of {totalPages}
       </span>
       <button
         onClick={() => onChange(page + 1)}
         disabled={page >= totalPages}
-        className="rounded px-3 py-1 text-sm border border-gray-300 disabled:opacity-40 hover:bg-gray-50"
+        className="rounded-full px-4 py-1.5 text-xs border border-white/10 bg-white/5 text-slate-300 hover:bg-white/10 hover:text-white disabled:opacity-30 disabled:hover:bg-white/5"
       >
         Next →
       </button>
