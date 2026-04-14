@@ -31,7 +31,7 @@ export function MapView({ stats }: MapViewProps) {
             onClose={() => setSelected(null)}
           />
         ) : (
-          <div className="bg-gray-50 rounded-2xl border border-dashed border-gray-200 p-6 text-center text-sm text-gray-400">
+          <div className="rounded-2xl border border-dashed border-white/10 bg-white/5 p-6 text-center text-sm text-slate-500">
             Click a state on the map to see details
           </div>
         )}
