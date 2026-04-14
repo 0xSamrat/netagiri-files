@@ -18,14 +18,14 @@ interface RankingTableProps {
 export function RankingTable({ politicians, startRank }: RankingTableProps) {
   if (politicians.length === 0) {
     return (
-      <div className="text-center text-slate-500 py-16 text-sm rounded-2xl border border-white/5 bg-[#0a0f24]/60">
+      <div className="text-center text-slate-500 py-16 text-sm rounded-2xl border border-white/5 bg-[#0b0f23]">
         No politicians found matching your filters.
       </div>
     );
   }
 
   return (
-    <div className="overflow-x-auto rounded-2xl border border-white/5 bg-[#0a0f24]/60 backdrop-blur-md">
+    <div className="overflow-x-auto rounded-2xl border border-white/5 bg-[#0b0f23] backdrop-blur-md">
       <table className="w-full text-sm">
         <thead>
           <tr className="text-slate-500 text-[10px] uppercase tracking-[0.18em] border-b border-white/5">
@@ -56,7 +56,7 @@ export function RankingTable({ politicians, startRank }: RankingTableProps) {
               <td className="px-4 py-3">
                 <Link
                   href={`/politician/${p.id}`}
-                  className="font-medium text-slate-100 hover:text-violet-300"
+                  className="font-medium text-slate-100 hover:text-[#ff2d87]"
                 >
                   {p.name}
                 </Link>
@@ -90,7 +90,7 @@ export function RankingTable({ politicians, startRank }: RankingTableProps) {
               </td>
               <td className="px-4 py-3 text-right font-semibold">
                 {p.total_cases > 0 ? (
-                  <span className="text-amber-300">{p.total_cases}</span>
+                  <span className="text-[#ff2d87]">{p.total_cases}</span>
                 ) : (
                   <span className="text-slate-700">0</span>
                 )}

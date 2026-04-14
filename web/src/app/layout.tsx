@@ -31,10 +31,18 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#07070f] text-slate-200">
+      <body className="min-h-full flex flex-col bg-[#060814] text-slate-200">
         <QueryProvider>
           <Header />
-          <main className="flex-1">{children}</main>
+          <main
+            className="flex-1 relative"
+            style={{
+              backgroundImage:
+                "radial-gradient(ellipse 70% 50% at 50% 35%, rgba(255,45,135,0.06), transparent 70%)",
+            }}
+          >
+            {children}
+          </main>
           <Footer />
         </QueryProvider>
       </body>

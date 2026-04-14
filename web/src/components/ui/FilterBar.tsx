@@ -15,7 +15,7 @@ interface FilterBarProps {
 }
 
 const SELECT_CLS =
-  "text-xs rounded-full border border-white/10 bg-white/5 text-slate-200 px-3 py-2 hover:border-white/20 focus:outline-none focus:ring-2 focus:ring-violet-500/40 appearance-none";
+  "text-xs rounded-full border border-white/10 bg-white/5 text-slate-200 px-3 py-2 hover:border-white/20 focus:outline-none focus:ring-2 focus:ring-[#ff2d87]/50 appearance-none";
 
 export function FilterBar({
   parties,
@@ -44,7 +44,7 @@ export function FilterBar({
   );
 
   return (
-    <div className="flex flex-wrap gap-2 items-center p-3 bg-[#0a0f24]/80 rounded-2xl border border-white/5 backdrop-blur-md">
+    <div className="flex flex-wrap gap-2 items-center p-3 bg-[#0b0f23] rounded-2xl border border-white/5 backdrop-blur-md">
       <select
         value={currentParty}
         onChange={(e) => update("party", e.target.value)}

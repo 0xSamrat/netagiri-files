@@ -89,7 +89,7 @@ export function StatsRail({
   return (
     <div className="space-y-4">
       {/* Donut card */}
-      <div className="rounded-3xl border border-white/5 bg-[#0a0f24]/80 p-5 backdrop-blur-md">
+      <div className="rounded-3xl border border-white/5 bg-[#0b0f23] p-5 backdrop-blur-md">
         <div className="flex items-center justify-between mb-3">
           <span className="text-[10px] uppercase tracking-[0.24em] text-slate-500">
             Statistics
@@ -110,7 +110,7 @@ export function StatsRail({
                   opacity={
                     selectedParty && selectedParty !== a.data.party ? 0.25 : 0.95
                   }
-                  stroke="#0a0f24"
+                  stroke="#0b0f23"
                   strokeWidth={2}
                   style={{ cursor: "pointer" }}
                   onClick={() => onPartyClick?.(a.data.party)}
@@ -149,7 +149,7 @@ export function StatsRail({
       </div>
 
       {/* Top parties bars */}
-      <div className="rounded-3xl border border-white/5 bg-[#0a0f24]/80 p-5 backdrop-blur-md">
+      <div className="rounded-3xl border border-white/5 bg-[#0b0f23] p-5 backdrop-blur-md">
         <div className="flex items-center justify-between mb-4">
           <span className="text-[10px] uppercase tracking-[0.24em] text-slate-500">
             Top parties

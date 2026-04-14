@@ -104,18 +104,10 @@ export function PoliticiansView({
             selectedParty={party || undefined}
           />
           {/* Bottom 3 stats row */}
-          <div className="grid grid-cols-3 gap-3">
-            <StatBox label="Total MPs" value={totalMps} accent="#60a5fa" />
-            <StatBox
-              label="With Cases"
-              value={mpsWithCases}
-              accent="#f59e0b"
-            />
-            <StatBox
-              label="Total Cases"
-              value={totalCases}
-              accent="#f43f5e"
-            />
+          <div className="grid grid-cols-3 rounded-2xl border border-white/5 bg-[#0b0f23] overflow-hidden divide-x divide-white/5">
+            <StatBox label="Total MPs" value={totalMps} />
+            <StatBox label="With Cases" value={mpsWithCases} />
+            <StatBox label="Total Cases" value={totalCases} />
           </div>
         </section>
       </div>
@@ -160,36 +152,14 @@ export function PoliticiansView({
   );
 }
 
-function StatBox({
-  label,
-  value,
-  accent,
-}: {
-  label: string;
-  value: number;
-  accent: string;
-}) {
+function StatBox({ label, value }: { label: string; value: number }) {
   return (
-    <div
-      className="rounded-2xl border border-white/5 bg-[#0a0f24]/80 backdrop-blur-md px-5 py-4 relative overflow-hidden"
-      style={{
-        boxShadow: `inset 0 1px 0 rgba(255,255,255,0.04), 0 0 32px ${accent}10`,
-      }}
-    >
-      <div
-        className="absolute -top-8 -right-8 h-24 w-24 rounded-full opacity-20 blur-2xl"
-        style={{ background: accent }}
-      />
-      <div className="relative">
-        <div className="text-[10px] uppercase tracking-[0.2em] text-slate-500">
-          {label}
-        </div>
-        <div
-          className="text-3xl font-bold tabular-nums mt-1"
-          style={{ color: accent }}
-        >
-          {value.toLocaleString()}
-        </div>
+    <div className="px-6 py-5 text-center">
+      <div className="text-[10px] uppercase tracking-[0.24em] text-slate-500">
+        {label}
+      </div>
+      <div className="text-3xl font-bold tabular-nums mt-1 text-white">
+        {value.toLocaleString()}
       </div>
     </div>
   );
