@@ -142,7 +142,34 @@ export default function DisclaimerPage() {
         </p>
       </Section>
 
-      <Section title="8. Non-affiliation">
+      <Section title="8. Analytics and privacy">
+        <p>
+          This site uses{" "}
+          <a
+            href="https://clarity.microsoft.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#ff2d87] hover:text-white underline underline-offset-2"
+          >
+            Microsoft Clarity
+          </a>{" "}
+          to understand how visitors use the interface — which pages are
+          viewed, how far people scroll, and where they click. Clarity may
+          record session interactions (mouse movement, clicks, scroll) in an
+          aggregated, privacy-friendly form, and may use cookies and similar
+          technologies for this purpose. The collected data is subject to
+          Microsoft&apos;s privacy terms.
+        </p>
+        <p>
+          We do not sell, share, or commercialize this data, and we do not run
+          advertising on this site. Analytics are used solely to improve the
+          usability of NetaGirifiles. If you prefer not to be included, most
+          browsers let you block analytics scripts through privacy settings or
+          standard content-blocker extensions.
+        </p>
+      </Section>
+
+      <Section title="9. Non-affiliation">
         <p>
           NetaGirifiles is an independent, non-partisan civic project. It is
           not affiliated with, endorsed by, or funded by any political party,
@@ -153,7 +180,7 @@ export default function DisclaimerPage() {
         </p>
       </Section>
 
-      <Section title="9. Corrections and takedown">
+      <Section title="10. Corrections and takedown">
         <p>
           If you are a named individual or an authorized representative and
           believe a specific entry on this site is factually inaccurate — for
@@ -174,7 +201,7 @@ export default function DisclaimerPage() {
         </p>
       </Section>
 
-      <Section title="10. Liability">
+      <Section title="11. Liability">
         <p>
           NetaGirifiles is a volunteer project offered &ldquo;as is&rdquo;
           without warranty of any kind. To the maximum extent permitted by

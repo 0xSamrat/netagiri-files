@@ -66,7 +66,7 @@ export default function AboutPage() {
             pre-rendered MP pages, a bubble chart that sulks on mobile but
             works, a map, dynamic OG images, and an audio easter egg with
             famous parliamentary dialogues. All open source, all drawn from
-            public records. No ads, no tracking, no political leanings.
+            public records. No ads, no data sold to anyone, no political leanings — just lightweight analytics so I know what&apos;s working.
           </p>
 
           <div className="relative rounded-xl border border-[#ff2d87]/25 bg-[#ff2d87]/5 p-4">
