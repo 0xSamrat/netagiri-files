@@ -25,24 +25,24 @@ const MOBILE_HEIGHT = 460;
 const MOBILE_BREAKPOINT = 640;
 const INSIDE_LABEL_MIN_R = 40;
 
-// Gamified neon palette — each bubble gets a distinct color
+// Brand-aligned palette — pink-led, harmonizes with #0b0f23 + #ff2d87
 const NEON_PALETTE = [
-  "#ff1493", // hot pink
-  "#00f5ff", // cyan
-  "#bf00ff", // neon purple
-  "#39ff14", // neon green
-  "#ff6b00", // neon orange
-  "#00b3ff", // electric blue
-  "#ffe600", // neon yellow
-  "#ff0055", // crimson
-  "#00ff88", // mint
-  "#c800ff", // violet
-  "#ff3b3b", // neon red
-  "#00ffd5", // aqua
-  "#ff9500", // tangerine
-  "#a0ff00", // lime
-  "#ff00aa", // magenta
-  "#4d6bff", // cobalt
+  "#ff2d87", // brand pink (largest bubble)
+  "#06b6d4", // cyan
+  "#8b5cf6", // violet
+  "#f59e0b", // amber
+  "#10b981", // emerald
+  "#ef4444", // rose-red
+  "#3b82f6", // blue
+  "#ec4899", // pink-400
+  "#14b8a6", // teal
+  "#a855f7", // purple
+  "#eab308", // yellow
+  "#f97316", // orange
+  "#22d3ee", // sky
+  "#84cc16", // lime
+  "#d946ef", // fuchsia
+  "#6366f1", // indigo
 ];
 
 function hexToRgb(hex: string): [number, number, number] {
@@ -282,40 +282,65 @@ export function BubbleChart({
     bigNodes
       .append("text")
       .attr("text-anchor", "middle")
-      .attr("y", (d) => -d.r * 0.08)
-      .attr("fill", (d) => d.color)
+      .attr("y", (d) => -d.r * 0.12)
+      .attr("fill", "#ffffff")
       .attr("font-weight", "700")
+      .attr("letter-spacing", "0.04em")
       .attr("font-size", (d) =>
-        Math.max(11, Math.min(d.r * 0.26, 15)).toFixed(1),
+        Math.max(11, Math.min(d.r * 0.24, 16)).toFixed(1),
       )
-      .style("text-shadow", (d) => `0 0 8px ${d.color}, 0 1px 3px #000`)
+      .style(
+        "text-shadow",
+        "0 1px 2px rgba(0,0,0,0.9), 0 0 6px rgba(0,0,0,0.7)",
+      )
       .attr("pointer-events", "none")
       .text((d) => d.party);
 
     bigNodes
       .append("text")
       .attr("text-anchor", "middle")
-      .attr("y", (d) => d.r * 0.24)
+      .attr("y", (d) => d.r * 0.22)
       .attr("fill", "#ffffff")
       .attr("font-weight", "800")
       .attr("font-size", (d) =>
-        Math.max(13, Math.min(d.r * 0.4, 24)).toFixed(1),
+        Math.max(16, Math.min(d.r * 0.44, 28)).toFixed(1),
       )
-      .style("text-shadow", (d) => `0 0 10px ${d.color}, 0 1px 4px #000`)
+      .style(
+        "text-shadow",
+        "0 2px 4px rgba(0,0,0,0.95), 0 0 8px rgba(0,0,0,0.8)",
+      )
       .attr("pointer-events", "none")
-      .text((d) => `${d.totalCases}`);
+      .text((d) => d.totalCases.toLocaleString());
+
+    bigNodes
+      .append("text")
+      .attr("text-anchor", "middle")
+      .attr("y", (d) => d.r * 0.5)
+      .attr("fill", "rgba(255,255,255,0.7)")
+      .attr("font-weight", "600")
+      .attr("font-size", (d) =>
+        Math.max(8, Math.min(d.r * 0.15, 11)).toFixed(1),
+      )
+      .style("text-transform", "uppercase")
+      .style("letter-spacing", "0.1em")
+      .style("text-shadow", "0 1px 2px rgba(0,0,0,0.9)")
+      .attr("pointer-events", "none")
+      .text("cases");
 
     node
       .filter((d) => d.r < INSIDE_LABEL_MIN_R && d.r >= 20)
       .append("text")
       .attr("text-anchor", "middle")
       .attr("dy", "0.35em")
-      .attr("fill", (d) => d.color)
+      .attr("fill", "#ffffff")
       .attr("font-weight", "700")
       .attr("font-size", (d) =>
-        Math.max(9, Math.min(d.r * 0.5, 13)).toFixed(1),
+        Math.max(10, Math.min(d.r * 0.45, 13)).toFixed(1),
       )
-      .style("text-shadow", (d) => `0 0 6px ${d.color}, 0 1px 2px #000`)
+      .style(
+        "text-shadow",
+        "0 1px 2px rgba(0,0,0,0.9), 0 0 4px rgba(0,0,0,0.7)",
+      )
       .attr("pointer-events", "none")
       .text((d) => d.party);
 
@@ -327,24 +352,37 @@ export function BubbleChart({
       .join("div")
       .attr("id", "bubble-tooltip")
       .style("position", "fixed")
-      .style("background", "rgba(5,5,15,0.95)")
+      .style("background", "rgba(11,15,35,0.96)")
       .style("color", "#fff")
-      .style("border", "1px solid rgba(255,255,255,0.1)")
-      .style("padding", "8px 12px")
-      .style("border-radius", "8px")
+      .style("border", "1px solid rgba(255,255,255,0.08)")
+      .style("padding", "10px 14px")
+      .style("border-radius", "12px")
       .style("font-size", "12px")
+      .style("backdrop-filter", "blur(8px)")
+      .style("box-shadow", "0 8px 32px rgba(0,0,0,0.6)")
       .style("pointer-events", "none")
       .style("opacity", "0")
-      .style("z-index", "1000");
+      .style("z-index", "1000")
+      .style("transition", "opacity 0.15s");
 
     node
       .on("mousemove", (event: MouseEvent, d) => {
+        const pct =
+          d.count > 0 ? (d.totalCases / d.count).toFixed(1) : "0";
         tooltip
           .style("opacity", "1")
           .style("left", `${event.clientX + 14}px`)
           .style("top", `${event.clientY - 30}px`)
           .html(
-            `<strong>${d.partyName}</strong><br/>${d.count} MP${d.count !== 1 ? "s" : ""} · ${d.totalCases} case${d.totalCases !== 1 ? "s" : ""}`,
+            `<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+               <span style="height:8px;width:8px;border-radius:999px;background:${d.color};box-shadow:0 0 8px ${d.color}"></span>
+               <strong style="font-size:13px">${d.partyName}</strong>
+             </div>
+             <div style="color:#cbd5e1;font-size:11px;line-height:1.6">
+               <div><span style="color:#64748b">MPs:</span> <strong style="color:#fff">${d.count}</strong></div>
+               <div><span style="color:#64748b">Total cases:</span> <strong style="color:#ff2d87">${d.totalCases}</strong></div>
+               <div><span style="color:#64748b">Avg / MP:</span> <strong style="color:#fff">${pct}</strong></div>
+             </div>`,
           );
       })
       .on("mouseleave", () => tooltip.style("opacity", "0"));
@@ -379,18 +417,17 @@ export function BubbleChart({
       className="relative w-full rounded-3xl overflow-hidden ring-1 ring-white/5"
       style={{
         background:
-          "radial-gradient(ellipse at 50% 50%, #0e0520 0%, #050310 45%, #020208 90%)",
+          "radial-gradient(ellipse at 50% 40%, #111736 0%, #0a0e22 45%, #060814 90%)",
       }}
     >
-      <div className="pointer-events-none absolute inset-0 flex items-start justify-center pt-10">
-        <div className="text-center">
-          <div
-            className="text-4xl sm:text-5xl font-bold tracking-tight"
-            style={{ color: "rgba(180,190,230,0.07)" }}
-          >
-            Criminal Cases
-          </div>
-        </div>
+      <div className="pointer-events-none absolute top-4 left-5 flex items-center gap-2 z-10">
+        <span className="h-1.5 w-1.5 rounded-full bg-[#ff2d87] animate-pulse" />
+        <span className="text-[10px] uppercase tracking-[0.2em] text-slate-400 font-semibold">
+          Criminal cases by party
+        </span>
+      </div>
+      <div className="pointer-events-none absolute top-4 right-5 z-10 text-[10px] uppercase tracking-[0.18em] text-slate-500">
+        Click a bubble to filter
       </div>
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.04]"

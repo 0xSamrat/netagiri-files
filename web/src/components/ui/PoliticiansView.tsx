@@ -104,10 +104,10 @@ export function PoliticiansView({
             selectedParty={party || undefined}
           />
           {/* Bottom 3 stats row */}
-          <div className="grid grid-cols-3 rounded-2xl border border-white/5 bg-[#0b0f23] overflow-hidden divide-x divide-white/5">
+          <div className="grid grid-cols-3 rounded-2xl border border-white/5 bg-gradient-to-br from-[#0b0f23] to-[#080b1d] overflow-hidden divide-x divide-white/5">
             <StatBox label="Total MPs" value={totalMps} />
-            <StatBox label="With Cases" value={mpsWithCases} />
-            <StatBox label="Total Cases" value={totalCases} />
+            <StatBox label="With Cases" value={mpsWithCases} accent />
+            <StatBox label="Total Cases" value={totalCases} accent />
           </div>
         </section>
       </div>
@@ -152,13 +152,25 @@ export function PoliticiansView({
   );
 }
 
-function StatBox({ label, value }: { label: string; value: number }) {
+function StatBox({
+  label,
+  value,
+  accent,
+}: {
+  label: string;
+  value: number;
+  accent?: boolean;
+}) {
   return (
-    <div className="px-6 py-5 text-center">
-      <div className="text-[11px] uppercase tracking-[0.16em] text-slate-500 font-semibold">
+    <div className="px-4 sm:px-6 py-5 text-center min-w-0">
+      <div className="text-[11px] uppercase tracking-[0.16em] text-slate-500 font-semibold truncate">
         {label}
       </div>
-      <div className="text-3xl font-bold tabular-nums mt-1 text-white">
+      <div
+        className={`text-2xl sm:text-3xl font-bold tabular-nums mt-1 truncate ${
+          accent ? "text-[#ff2d87]" : "text-white"
+        }`}
+      >
         {value.toLocaleString()}
       </div>
     </div>
