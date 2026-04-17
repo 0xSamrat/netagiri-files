@@ -1,5 +1,6 @@
-export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.netagirifiles.fun";
+// Always point share links + canonical URLs at the public production domain.
+// Local/preview URLs aren't useful to anyone you share with.
+export const SITE_URL = "https://www.netagirifiles.fun";
 
 export interface ShareTarget {
   url: string;
