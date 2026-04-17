@@ -51,6 +51,7 @@ html,
 body {
   background: #060814;
   color: #f1f5f9;
+  color-scheme: dark;
   font-family: var(--font-geist-sans), system-ui, sans-serif;
   font-feature-settings: "ss01", "cv11";
   -webkit-font-smoothing: antialiased;

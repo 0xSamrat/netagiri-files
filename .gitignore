@@ -37,6 +37,9 @@ coverage/
 # ---- Vercel ----
 .vercel/
 
+# ---- Claude Code (local agent config) ----
+.claude/
+
 # ---- Local DB dumps / scratch ----
 *.dump
 *.sql.bak
