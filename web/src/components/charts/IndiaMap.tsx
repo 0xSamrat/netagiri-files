@@ -193,20 +193,20 @@ export function IndiaMap({ stats, onStateClick, selectedState }: IndiaMapProps) 
     svgRef.current.innerHTML = "";
 
     const defs = svg.append("defs");
-    const redGlow = defs
+    const pinkGlow = defs
       .append("filter")
-      .attr("id", "red-glow")
+      .attr("id", "pink-glow")
       .attr("x", "-100%")
       .attr("y", "-100%")
       .attr("width", "300%")
       .attr("height", "300%");
-    redGlow
+    pinkGlow
       .append("feGaussianBlur")
       .attr("stdDeviation", "2.2")
       .attr("result", "blur");
-    const redMerge = redGlow.append("feMerge");
-    redMerge.append("feMergeNode").attr("in", "blur");
-    redMerge.append("feMergeNode").attr("in", "SourceGraphic");
+    const pinkMerge = pinkGlow.append("feMerge");
+    pinkMerge.append("feMergeNode").attr("in", "blur");
+    pinkMerge.append("feMergeNode").attr("in", "SourceGraphic");
 
     const hexGroup = svg.append("g").attr("class", "hexes");
 
@@ -221,19 +221,19 @@ export function IndiaMap({ stats, onStateClick, selectedState }: IndiaMapProps) 
         const isSelected =
           selectedState && h.stateStat && h.stateStat.id === selectedState.id;
         if (isSelected) {
-          return d3.interpolateRgb("#93c5fd", "#ffffff")(h.jitter * 0.5);
+          return d3.interpolateRgb("#ff2d87", "#ffffff")(0.2 + h.jitter * 0.4);
         }
         if (isHot && h.jitter > 0.35) {
-          return d3.interpolateRgb("#7f1d1d", "#f87171")(0.3 + h.jitter * 0.7);
+          return d3.interpolateRgb("#7a1644", "#ff2d87")(0.3 + h.jitter * 0.7);
         }
         if (isHot) {
-          return d3.interpolateRgb("#1e3a8a", "#60a5fa")(0.2 + h.jitter * 0.5);
+          return d3.interpolateRgb("#1a1f3d", "#3d2547")(0.3 + h.jitter * 0.5);
         }
-        return d3.interpolateRgb("#172554", "#3b82f6")(0.15 + h.jitter * 0.6);
+        return d3.interpolateRgb("#10152e", "#2a3356")(0.15 + h.jitter * 0.6);
       })
       .attr("filter", (h) => {
         const isHot = hotStateNames.has(normalizeName(h.stateName));
-        return isHot && h.jitter > 0.7 ? "url(#red-glow)" : null;
+        return isHot && h.jitter > 0.7 ? "url(#pink-glow)" : null;
       })
       .style("cursor", "pointer")
       .on("mousemove", function (event: MouseEvent, h) {
@@ -258,7 +258,7 @@ export function IndiaMap({ stats, onStateClick, selectedState }: IndiaMapProps) 
       className="relative w-full rounded-3xl overflow-hidden ring-1 ring-white/5"
       style={{
         background:
-          "radial-gradient(ellipse at 50% 40%, #101a33 0%, #050810 70%)",
+          "radial-gradient(ellipse at 50% 40%, #10152e 0%, #060814 70%)",
       }}
     >
       {/* Subtle grid overlay */}
@@ -280,7 +280,7 @@ export function IndiaMap({ stats, onStateClick, selectedState }: IndiaMapProps) 
         return (
           <div
             key={c.stat.id}
-            className="pointer-events-none absolute flex items-center gap-2.5 rounded-xl border border-white/10 bg-slate-950/75 backdrop-blur-md px-3 py-2 shadow-2xl shadow-black/60"
+            className="pointer-events-none absolute hidden sm:flex items-center gap-2.5 rounded-xl border border-white/10 bg-[#0b0f23]/85 backdrop-blur-md px-3 py-2 shadow-2xl shadow-black/60 max-w-[180px]"
             style={{
               left: `${c.x}px`,
               top: `${c.y}px`,
@@ -294,17 +294,17 @@ export function IndiaMap({ stats, onStateClick, selectedState }: IndiaMapProps) 
               className="h-9 w-9 rounded-lg flex items-center justify-center text-[11px] font-extrabold text-white"
               style={{
                 background: hot
-                  ? "linear-gradient(135deg, #fca5a5 0%, #b91c1c 100%)"
-                  : "linear-gradient(135deg, #93c5fd 0%, #1e3a8a 100%)",
+                  ? "linear-gradient(135deg, #ff2d87 0%, #7a1644 100%)"
+                  : "linear-gradient(135deg, #2a3356 0%, #10152e 100%)",
                 boxShadow: hot
-                  ? "0 0 16px rgba(239,68,68,0.55), inset 0 1px 0 rgba(255,255,255,0.35)"
-                  : "0 0 14px rgba(59,130,246,0.45), inset 0 1px 0 rgba(255,255,255,0.35)",
+                  ? "0 0 16px rgba(255,45,135,0.55), inset 0 1px 0 rgba(255,255,255,0.25)"
+                  : "0 0 12px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.15)",
               }}
             >
               {c.stat.code}
             </div>
-            <div className="flex flex-col leading-none">
-              <span className="text-[10px] uppercase tracking-[0.14em] text-slate-400 mb-1">
+            <div className="flex flex-col leading-none min-w-0">
+              <span className="text-[10px] uppercase tracking-[0.14em] text-slate-400 mb-1 truncate">
                 {c.stat.name}
               </span>
               <span className="text-lg font-bold text-white tabular-nums leading-none">
@@ -319,24 +319,32 @@ export function IndiaMap({ stats, onStateClick, selectedState }: IndiaMapProps) 
       })}
 
       {/* Legend */}
-      <div className="absolute bottom-3 left-4 right-4 flex items-center gap-2 text-[10px] text-slate-400 pointer-events-none">
-        <span className="uppercase tracking-wider">low</span>
+      <div className="absolute bottom-3 left-4 right-4 flex items-center gap-2 text-[10px] text-slate-400 pointer-events-none min-w-0">
+        <span className="uppercase tracking-wider flex-shrink-0">low</span>
         <div
-          className="h-1.5 flex-1 rounded-full"
+          className="h-1.5 flex-1 min-w-[40px] rounded-full"
           style={{
             background:
-              "linear-gradient(to right, #1e3a8a, #3b82f6, #f59e0b, #ef4444)",
+              "linear-gradient(to right, #10152e, #2a3356, #7a1644, #ff2d87)",
           }}
         />
-        <span className="uppercase tracking-wider">high</span>
-        <span className="ml-1 text-slate-500">% MPs with cases</span>
+        <span className="uppercase tracking-wider flex-shrink-0">high</span>
+        <span className="ml-1 text-slate-500 truncate hidden sm:inline">
+          % MPs with cases
+        </span>
       </div>
 
       {/* Tooltip */}
       {tooltip && (
         <div
-          className="pointer-events-none absolute z-20 rounded-lg border border-white/10 bg-slate-950/95 px-3 py-2 text-xs text-white shadow-xl"
-          style={{ left: tooltip.x + 14, top: Math.max(0, tooltip.y - 10) }}
+          className="pointer-events-none absolute z-20 rounded-lg border border-white/10 bg-[#0b0f23]/95 backdrop-blur-md px-3 py-2 text-xs text-white shadow-xl max-w-[180px]"
+          style={{
+            left:
+              tooltip.x > width - 200
+                ? Math.max(8, tooltip.x - 190)
+                : tooltip.x + 14,
+            top: Math.max(8, tooltip.y - 10),
+          }}
         >
           <div className="font-semibold mb-0.5">{tooltip.name}</div>
           {tooltip.total_mps > 0 ? (

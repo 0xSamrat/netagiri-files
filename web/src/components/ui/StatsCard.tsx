@@ -7,18 +7,18 @@ interface StatsCardProps {
 
 export function StatsCard({ label, value, sub, accent }: StatsCardProps) {
   return (
-    <div className="rounded-2xl border border-white/5 bg-[#0b0f23] p-5 flex flex-col gap-1 backdrop-blur-md">
-      <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-[0.16em]">
+    <div className="rounded-2xl border border-white/5 bg-[#0b0f23] p-5 flex flex-col gap-1 backdrop-blur-md min-w-0">
+      <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-[0.16em] truncate">
         {label}
       </span>
       <span
-        className={`text-2xl font-bold tabular-nums ${
+        className={`text-2xl font-bold tabular-nums truncate ${
           accent ? "text-[#ff2d87]" : "text-white"
         }`}
       >
         {value}
       </span>
-      {sub && <span className="text-[10px] text-slate-500">{sub}</span>}
+      {sub && <span className="text-[10px] text-slate-500 truncate">{sub}</span>}
     </div>
   );
 }
