@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const TABS = [
-  { href: "/", label: "Overview" },
+  { href: "/lok-sabha", label: "Lok Sabha" },
   { href: "/map", label: "Map" },
   { href: "/about", label: "About" },
 ];
@@ -17,7 +17,7 @@ export function Header() {
         <Link href="/" className="flex items-center gap-2 shrink-0">
           <span className="h-6 w-6 rounded-md bg-[#ff2d87] shadow-lg shadow-[#ff2d87]/40" />
           <span className="hidden sm:inline font-bold text-sm tracking-[0.22em] text-white">
-            NETAWATCH
+            NETAGIRI<span className="text-[#ff2d87]">FILES</span>
           </span>
         </Link>
         <nav className="flex items-center gap-1 p-1 rounded-full bg-white/[0.04] border border-white/5">

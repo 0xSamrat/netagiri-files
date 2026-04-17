@@ -9,7 +9,7 @@ export function Footer() {
           <strong className="text-amber-200">Disclaimer:</strong> All
           information displayed on this site is sourced directly from
           affidavits self-declared by candidates and submitted to the Election
-          Commission of India (ECI). NetaWatch is a civic transparency tool and
+          Commission of India (ECI). NetaGirifiles is a civic transparency tool and
           does not make independent judgements about any individual. Pendency
           of a criminal case does not imply guilt. Data is provided for
           informational purposes only. Source:{" "}
@@ -24,7 +24,7 @@ export function Footer() {
           (Association for Democratic Reforms).
         </div>
         <div className="flex flex-wrap items-center justify-between gap-4 text-xs text-slate-500">
-          <span>© {new Date().getFullYear()} NetaWatch</span>
+          <span>© {new Date().getFullYear()} NetaGirifiles</span>
           <nav className="flex gap-4">
             <Link href="/about" className="hover:text-slate-300">
               About

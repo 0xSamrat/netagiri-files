@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "NetaWatch — Track MP Criminal Records",
+  title: "NetaGirifiles — Track MP Criminal Records",
   description:
     "Civic transparency platform surfacing criminal cases declared by Indian MPs in their ECI election affidavits.",
 };

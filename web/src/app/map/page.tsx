@@ -4,7 +4,7 @@ import { StatsCard } from "@/components/ui/StatsCard";
 import { MapView } from "./MapView";
 
 export const metadata: Metadata = {
-  title: "India Map — NetaWatch",
+  title: "India Map — NetaGirifiles",
   description:
     "Hex-grid map showing the percentage of Lok Sabha MPs with declared criminal cases, by state.",
 };

@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const p = await getPoliticianById(id);
   if (!p) return {};
   return {
-    title: `${p.name} — NetaWatch`,
+    title: `${p.name} — NetaGirifiles`,
     description: `${p.name} (${p.party_short_name ?? "IND"}, ${p.constituency ?? p.state_name}) has declared ${p.total_cases} criminal case${p.total_cases !== 1 ? "s" : ""} in their ECI affidavit.`,
   };
 }
