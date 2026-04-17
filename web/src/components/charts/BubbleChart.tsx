@@ -20,7 +20,9 @@ interface PartyBubble {
   y?: number;
 }
 
-const HEIGHT = 680;
+const DESKTOP_HEIGHT = 680;
+const MOBILE_HEIGHT = 460;
+const MOBILE_BREAKPOINT = 640;
 const INSIDE_LABEL_MIN_R = 40;
 
 // Gamified neon palette — each bubble gets a distinct color
@@ -98,19 +100,26 @@ export function BubbleChart({
     return () => ro.disconnect();
   }, []);
 
+  const height = width < MOBILE_BREAKPOINT ? MOBILE_HEIGHT : DESKTOP_HEIGHT;
+
   const laidOut = useMemo(() => {
     if (!width || bubbles.length === 0) {
       return [] as (PartyBubble & { r: number })[];
     }
+    const isMobile = width < MOBILE_BREAKPOINT;
+    const h = isMobile ? MOBILE_HEIGHT : DESKTOP_HEIGHT;
     const maxCases = d3.max(bubbles, (d) => d.totalCases) ?? 1;
     const scale = d3
       .scaleSqrt()
       .domain([0, maxCases])
-      .range([Math.max(20, width * 0.025), Math.min(130, width * 0.115)]);
+      .range([
+        Math.max(isMobile ? 16 : 20, width * (isMobile ? 0.03 : 0.025)),
+        Math.min(isMobile ? 90 : 130, width * (isMobile ? 0.14 : 0.115)),
+      ]);
 
     const nodes = bubbles.map((b) => ({ ...b }));
     const cx = width / 2;
-    const cy = HEIGHT / 2;
+    const cy = h / 2;
     const sim = d3
       .forceSimulation(nodes as d3.SimulationNodeDatum[])
       .force("charge", d3.forceManyBody().strength(8))
@@ -138,11 +147,11 @@ export function BubbleChart({
   useEffect(() => {
     if (!svgRef.current || !width || laidOut.length === 0) return;
     const svg = d3.select(svgRef.current);
-    svgRef.current.setAttribute("viewBox", `0 0 ${width} ${HEIGHT}`);
+    svgRef.current.setAttribute("viewBox", `0 0 ${width} ${height}`);
     svgRef.current.innerHTML = "";
 
     const cx = width / 2;
-    const cy = HEIGHT / 2;
+    const cy = height / 2;
 
     const defs = svg.append("defs");
 
@@ -362,7 +371,7 @@ export function BubbleChart({
       timer.stop();
       tooltip.remove();
     };
-  }, [laidOut, width, selectedParty, onPartyClick]);
+  }, [laidOut, width, height, selectedParty, onPartyClick]);
 
   return (
     <div
@@ -394,7 +403,7 @@ export function BubbleChart({
       <svg
         ref={svgRef}
         className="relative block w-full"
-        style={{ height: HEIGHT }}
+        style={{ height }}
       />
     </div>
   );

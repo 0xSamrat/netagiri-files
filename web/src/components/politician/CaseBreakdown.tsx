@@ -93,7 +93,7 @@ export function CaseBreakdown({ cases, totalCases }: CaseBreakdownProps) {
   if (totalCases === 0) {
     return (
       <div className="rounded-2xl border border-white/5 bg-[#0b0f23] p-6 backdrop-blur-md">
-        <h2 className="text-[10px] font-semibold text-slate-500 uppercase tracking-[0.24em] mb-4">
+        <h2 className="text-[11px] font-semibold text-slate-500 uppercase tracking-[0.16em] mb-4">
           Criminal Cases
         </h2>
         <p className="text-sm text-slate-500 text-center py-8">
@@ -106,10 +106,10 @@ export function CaseBreakdown({ cases, totalCases }: CaseBreakdownProps) {
   return (
     <div className="rounded-2xl border border-white/5 bg-[#0b0f23] p-6 backdrop-blur-md">
       <div className="flex items-center justify-between mb-1">
-        <span className="text-[10px] font-semibold text-slate-500 uppercase tracking-[0.24em]">
+        <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-[0.16em]">
           Criminal Cases
         </span>
-        <span className="text-[9px] text-slate-600 uppercase tracking-wider">
+        <span className="text-[10px] text-slate-600 uppercase tracking-[0.14em]">
           {totalCases} declared
         </span>
       </div>

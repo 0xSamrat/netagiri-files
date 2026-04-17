@@ -155,7 +155,7 @@ export function PoliticiansView({
 function StatBox({ label, value }: { label: string; value: number }) {
   return (
     <div className="px-6 py-5 text-center">
-      <div className="text-[10px] uppercase tracking-[0.24em] text-slate-500">
+      <div className="text-[11px] uppercase tracking-[0.16em] text-slate-500 font-semibold">
         {label}
       </div>
       <div className="text-3xl font-bold tabular-nums mt-1 text-white">

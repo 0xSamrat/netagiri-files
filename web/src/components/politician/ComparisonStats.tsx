@@ -67,10 +67,10 @@ export function ComparisonStats({
   return (
     <div className="rounded-2xl border border-white/5 bg-[#0b0f23] p-6 backdrop-blur-md">
       <div className="flex items-center justify-between mb-1">
-        <span className="text-[10px] font-semibold text-slate-500 uppercase tracking-[0.24em]">
+        <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-[0.16em]">
           How They Compare
         </span>
-        <span className="text-[9px] text-slate-600 uppercase tracking-wider">
+        <span className="text-[10px] text-slate-600 uppercase tracking-[0.14em]">
           by cases
         </span>
       </div>

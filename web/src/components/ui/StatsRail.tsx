@@ -91,10 +91,10 @@ export function StatsRail({
       {/* Donut card */}
       <div className="rounded-3xl border border-white/5 bg-[#0b0f23] p-5 backdrop-blur-md">
         <div className="flex items-center justify-between mb-3">
-          <span className="text-[10px] uppercase tracking-[0.24em] text-slate-500">
+          <span className="text-[11px] uppercase tracking-[0.16em] text-slate-500 font-semibold">
             Statistics
           </span>
-          <span className="text-[9px] text-slate-600 uppercase tracking-wider">
+          <span className="text-[10px] text-slate-600 uppercase tracking-[0.14em]">
             Lok Sabha
           </span>
         </div>
@@ -119,7 +119,7 @@ export function StatsRail({
             </g>
           </svg>
           <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center">
-            <span className="text-[9px] uppercase tracking-[0.2em] text-slate-500">
+            <span className="text-[10px] uppercase tracking-[0.14em] text-slate-500">
               Total cases
             </span>
             <span className="text-2xl font-bold text-white tabular-nums">
@@ -151,10 +151,10 @@ export function StatsRail({
       {/* Top parties bars */}
       <div className="rounded-3xl border border-white/5 bg-[#0b0f23] p-5 backdrop-blur-md">
         <div className="flex items-center justify-between mb-4">
-          <span className="text-[10px] uppercase tracking-[0.24em] text-slate-500">
+          <span className="text-[11px] uppercase tracking-[0.16em] text-slate-500 font-semibold">
             Top parties
           </span>
-          <span className="text-[9px] text-slate-600 uppercase tracking-wider">
+          <span className="text-[10px] text-slate-600 uppercase tracking-[0.14em]">
             by cases
           </span>
         </div>
@@ -188,7 +188,7 @@ export function StatsRail({
                       }}
                     />
                   </div>
-                  <div className="text-[9px] text-slate-600 mt-0.5">
+                  <div className="text-[10px] text-slate-600 mt-0.5">
                     {p.count} MP{p.count !== 1 ? "s" : ""}
                   </div>
                 </button>

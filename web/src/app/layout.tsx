@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { QueryProvider } from "@/providers/QueryProvider";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { DialogueBubble } from "@/components/ui/DialogueBubble";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -44,6 +45,7 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
+          <DialogueBubble />
         </QueryProvider>
       </body>
     </html>

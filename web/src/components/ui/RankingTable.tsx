@@ -50,10 +50,10 @@ export function RankingTable({ politicians, startRank }: RankingTableProps) {
               key={p.id}
               className="hover:bg-white/5 transition-colors cursor-pointer"
             >
-              <td className="px-4 py-3 text-slate-600 font-mono">
+              <td className="px-4 py-4 md:py-3 text-slate-600 font-mono">
                 {startRank + i}
               </td>
-              <td className="px-4 py-3">
+              <td className="px-4 py-4 md:py-3">
                 <Link
                   href={`/politician/${p.id}`}
                   className="font-medium text-slate-100 hover:text-[#ff2d87]"
@@ -65,11 +65,11 @@ export function RankingTable({ politicians, startRank }: RankingTableProps) {
                     Convicted
                   </span>
                 )}
-                <div className="text-[10px] text-slate-500 md:hidden">
+                <div className="text-[11px] text-slate-400 md:hidden mt-0.5">
                   {p.party_short_name}
                 </div>
               </td>
-              <td className="px-4 py-3 hidden md:table-cell">
+              <td className="px-4 py-4 md:py-3 hidden md:table-cell">
                 <span
                   className="inline-flex items-center gap-1.5 text-[10px] font-semibold px-2 py-1 rounded-full border"
                   style={{
@@ -85,17 +85,17 @@ export function RankingTable({ politicians, startRank }: RankingTableProps) {
                   {p.party_short_name ?? "IND"}
                 </span>
               </td>
-              <td className="px-4 py-3 text-slate-500 text-xs hidden lg:table-cell">
+              <td className="px-4 py-4 md:py-3 text-slate-500 text-xs hidden lg:table-cell">
                 {p.constituency ?? "—"}
               </td>
-              <td className="px-4 py-3 text-right font-semibold">
+              <td className="px-4 py-4 md:py-3 text-right font-semibold">
                 {p.total_cases > 0 ? (
                   <span className="text-[#ff2d87]">{p.total_cases}</span>
                 ) : (
                   <span className="text-slate-700">0</span>
                 )}
               </td>
-              <td className="px-4 py-3 text-right hidden sm:table-cell">
+              <td className="px-4 py-4 md:py-3 text-right hidden sm:table-cell">
                 {p.serious_cases > 0 ? (
                   <span className="text-rose-400 font-semibold">
                     {p.serious_cases}
@@ -104,7 +104,7 @@ export function RankingTable({ politicians, startRank }: RankingTableProps) {
                   <span className="text-slate-700">0</span>
                 )}
               </td>
-              <td className="px-4 py-3 text-right text-slate-500 hidden lg:table-cell font-mono text-xs">
+              <td className="px-4 py-4 md:py-3 text-right text-slate-500 hidden lg:table-cell font-mono text-xs">
                 {formatAssets(p.assets_inr)}
               </td>
             </tr>

@@ -304,7 +304,7 @@ export function IndiaMap({ stats, onStateClick, selectedState }: IndiaMapProps) 
               {c.stat.code}
             </div>
             <div className="flex flex-col leading-none">
-              <span className="text-[9px] uppercase tracking-[0.14em] text-slate-400 mb-1">
+              <span className="text-[10px] uppercase tracking-[0.14em] text-slate-400 mb-1">
                 {c.stat.name}
               </span>
               <span className="text-lg font-bold text-white tabular-nums leading-none">
