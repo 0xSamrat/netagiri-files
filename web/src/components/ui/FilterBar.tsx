@@ -15,7 +15,7 @@ interface FilterBarProps {
 }
 
 const SELECT_CLS =
-  "text-[16px] sm:text-xs rounded-full border border-white/10 bg-white/5 text-slate-200 pl-3 pr-8 py-2 hover:border-white/20 focus:outline-none focus:ring-2 focus:ring-[#ff2d87]/50 appearance-none bg-no-repeat bg-[right_0.75rem_center] bg-[length:0.65rem] cursor-pointer [&>option]:bg-[#0b0f23] [&>option]:text-slate-200";
+  "w-full min-w-0 text-[13px] sm:text-xs rounded-full border border-white/10 bg-white/5 text-slate-200 pl-3 pr-8 py-2 hover:border-white/20 focus:outline-none focus:ring-2 focus:ring-[#ff2d87]/50 appearance-none bg-no-repeat bg-[right_0.75rem_center] bg-[length:0.65rem] cursor-pointer truncate [&>option]:bg-[#0b0f23] [&>option]:text-slate-200";
 
 const CHEVRON_BG = {
   backgroundImage:
@@ -49,7 +49,7 @@ export function FilterBar({
   );
 
   return (
-    <div className="flex flex-wrap gap-2 items-center p-3 bg-[#0b0f23] rounded-2xl border border-white/5 backdrop-blur-md">
+    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 p-3 bg-[#0b0f23] rounded-2xl border border-white/5 backdrop-blur-md">
       <select
         value={currentParty}
         onChange={(e) => update("party", e.target.value)}

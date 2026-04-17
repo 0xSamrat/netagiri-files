@@ -170,7 +170,7 @@ export function StatsRail({
             <div className="text-[9px] uppercase tracking-wider text-[#ff2d87]/80 font-semibold">
               Flagged
             </div>
-            <div className="text-base font-bold text-[#ff2d87] tabular-nums">
+            <div className="text-base font-bold text-white tabular-nums">
               {totals.withCases}
             </div>
           </div>

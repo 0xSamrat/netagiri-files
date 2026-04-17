@@ -21,8 +21,9 @@ interface PartyBubble {
 }
 
 const DESKTOP_HEIGHT = 680;
-const MOBILE_HEIGHT = 460;
+const MOBILE_HEIGHT = 520;
 const MOBILE_BREAKPOINT = 640;
+const MOBILE_MAX_BUBBLES = 10;
 const INSIDE_LABEL_MIN_R = 40;
 
 // Brand-aligned palette — pink-led, harmonizes with #0b0f23 + #ff2d87
@@ -108,16 +109,32 @@ export function BubbleChart({
     }
     const isMobile = width < MOBILE_BREAKPOINT;
     const h = isMobile ? MOBILE_HEIGHT : DESKTOP_HEIGHT;
-    const maxCases = d3.max(bubbles, (d) => d.totalCases) ?? 1;
+    const sorted = [...bubbles].sort((a, b) => b.totalCases - a.totalCases);
+    const visible =
+      isMobile && sorted.length > MOBILE_MAX_BUBBLES
+        ? (() => {
+            const top = sorted.slice(0, MOBILE_MAX_BUBBLES - 1);
+            const rest = sorted.slice(MOBILE_MAX_BUBBLES - 1);
+            const others: PartyBubble = {
+              party: "Others",
+              partyName: "Others",
+              count: rest.reduce((s, r) => s + r.count, 0),
+              totalCases: rest.reduce((s, r) => s + r.totalCases, 0),
+              color: "#475569",
+            };
+            return [...top, others];
+          })()
+        : sorted;
+    const maxCases = d3.max(visible, (d) => d.totalCases) ?? 1;
     const scale = d3
       .scaleSqrt()
       .domain([0, maxCases])
       .range([
-        Math.max(isMobile ? 16 : 20, width * (isMobile ? 0.03 : 0.025)),
-        Math.min(isMobile ? 90 : 130, width * (isMobile ? 0.14 : 0.115)),
+        Math.max(isMobile ? 22 : 20, width * (isMobile ? 0.05 : 0.025)),
+        Math.min(isMobile ? 72 : 130, width * (isMobile ? 0.2 : 0.115)),
       ]);
 
-    const nodes = bubbles.map((b) => ({ ...b }));
+    const nodes = visible.map((b) => ({ ...b }));
     const cx = width / 2;
     const cy = h / 2;
     const sim = d3
@@ -136,7 +153,14 @@ export function BubbleChart({
           ),
       )
       .stop();
-    for (let i = 0; i < 320; i++) sim.tick();
+    for (let i = 0; i < 320; i++) {
+      sim.tick();
+      for (const n of nodes as (PartyBubble & { x: number; y: number })[]) {
+        const r = scale(n.totalCases);
+        n.x = Math.max(r + 4, Math.min(width - r - 4, n.x));
+        n.y = Math.max(r + 4, Math.min(h - r - 4, n.y));
+      }
+    }
 
     return nodes.map((n) => ({
       ...n,
