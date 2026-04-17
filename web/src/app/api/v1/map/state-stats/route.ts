@@ -3,7 +3,7 @@ import { z } from "zod";
 import { getStateStats } from "@/lib/queries/stats";
 
 export const runtime = "nodejs";
-export const revalidate = 3600;
+export const revalidate = 604800;
 
 const schema = z.object({
   house: z.literal("lok_sabha").default("lok_sabha"),

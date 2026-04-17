@@ -3,7 +3,7 @@ import { z } from "zod";
 import { listPoliticians } from "@/lib/queries/politicians";
 
 export const runtime = "nodejs";
-export const revalidate = 3600;
+export const revalidate = 604800;
 
 const schema = z.object({
   party: z.string().optional(),

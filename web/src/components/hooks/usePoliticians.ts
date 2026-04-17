@@ -39,6 +39,5 @@ export function useBubbleData(house: House) {
       if (!res.ok) throw new Error("Failed to load bubble data");
       return res.json() as Promise<PoliticianSummary[]>;
     },
-    staleTime: 5 * 60_000,
   });
 }

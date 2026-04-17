@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { getBubbleData } from "@/lib/queries/politicians";
 
 export const runtime = "nodejs";
-export const revalidate = 3600;
+export const revalidate = 604800;
 
 export async function GET() {
   try {
