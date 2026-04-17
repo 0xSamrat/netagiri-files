@@ -25,6 +25,84 @@ export default function AboutPage() {
         </p>
       </header>
 
+      <section id="builder" className="space-y-4 scroll-mt-20">
+        <h2 className="text-xl sm:text-2xl font-bold text-white">
+          Who built this?
+        </h2>
+        <div className="relative overflow-hidden rounded-2xl border border-white/5 bg-gradient-to-br from-[#0b0f23] to-[#080b1d] p-5 sm:p-6 space-y-5 text-[15px] leading-relaxed">
+          <div
+            className="pointer-events-none absolute -top-20 -right-20 h-48 w-48 rounded-full"
+            style={{
+              background:
+                "radial-gradient(circle, rgba(255,45,135,0.22) 0%, rgba(255,45,135,0) 70%)",
+            }}
+          />
+
+          <div className="relative flex items-start gap-4">
+            <div className="hidden sm:flex h-14 w-14 rounded-2xl bg-[#ff2d87]/15 border border-[#ff2d87]/30 items-center justify-center text-2xl shrink-0">
+              👋
+            </div>
+            <div>
+              <p className="text-white font-semibold text-lg">
+                Hey, I&apos;m Samrat.
+              </p>
+              <p className="text-slate-400 text-sm">
+                Software engineer. Civic-data nerd. Built this site on a
+                stubborn Sunday.
+              </p>
+            </div>
+          </div>
+
+          <p className="relative">
+            I wanted to look up my own MP&apos;s declared affidavit data and
+            bounced off three clunky PDFs before giving up. So I did what
+            engineers do when they&apos;re annoyed — I built the thing I
+            wished existed.
+          </p>
+
+          <p className="relative">
+            <span className="text-white font-semibold">NetaGirifiles</span> is
+            a Next.js + Postgres + D3 + Go-scraper app: around ~800
+            pre-rendered MP pages, a bubble chart that sulks on mobile but
+            works, a map, dynamic OG images, and an audio easter egg with
+            famous parliamentary dialogues. All open source, all drawn from
+            public records. No ads, no tracking, no political leanings.
+          </p>
+
+          <div className="relative rounded-xl border border-[#ff2d87]/25 bg-[#ff2d87]/5 p-4">
+            <div className="text-[11px] uppercase tracking-[0.18em] text-[#ff2d87] font-bold mb-1">
+              PS — I&apos;m looking for my next role
+            </div>
+            <p className="text-slate-200 text-[14px]">
+              If your team is hiring engineers who{" "}
+              <span className="text-white font-semibold">ship</span>, care
+              about <span className="text-white font-semibold">craft</span>,
+              and take{" "}
+              <span className="text-white font-semibold">public-interest work</span>{" "}
+              seriously — this whole site is basically my portfolio. Full-time,
+              contract, interesting weird thing — I&apos;m listening. The four
+              buttons below all reach me.
+            </p>
+          </div>
+
+          <div className="relative flex flex-wrap gap-2 pt-1">
+            <BuilderLink
+              href="mailto:samrat.mukherjee2022@gmail.com"
+              label="📬 Email me"
+            />
+            <BuilderLink
+              href="https://www.linkedin.com/in/samrat-mukherjee00/"
+              label="LinkedIn"
+            />
+            <BuilderLink
+              href="https://github.com/0xSamrat/netagiri-files"
+              label="GitHub (this repo)"
+            />
+            <BuilderLink href="https://x.com/0x_samrat" label="X / Twitter" />
+          </div>
+        </div>
+      </section>
+
       <Section title="What this site does">
         <p>
           Under the Representation of the People Act, 1951 and directions of
@@ -215,6 +293,20 @@ function Section({
       <h2 className="text-xl sm:text-2xl font-bold text-white">{title}</h2>
       <div className="space-y-3 text-sm sm:text-[15px]">{children}</div>
     </section>
+  );
+}
+
+function BuilderLink({ href, label }: { href: string; label: string }) {
+  const external = href.startsWith("http");
+  return (
+    <a
+      href={href}
+      {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+      className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] text-slate-200 text-xs font-semibold px-3.5 py-1.5 hover:text-white hover:border-[#ff2d87]/40 hover:bg-[#ff2d87]/10 transition-colors"
+    >
+      {label}
+      <span aria-hidden>→</span>
+    </a>
   );
 }
 
