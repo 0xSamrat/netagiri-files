@@ -8,6 +8,8 @@ export const metadata: Metadata = {
     "Hex-grid map showing the percentage of Lok Sabha MPs with declared criminal cases, by state.",
 };
 
+export const revalidate = 86400;
+
 export default async function MapPage() {
   const stats = await getStateStats("lok_sabha");
 

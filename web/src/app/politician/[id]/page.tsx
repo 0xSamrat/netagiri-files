@@ -10,6 +10,8 @@ interface PageProps {
   params: Promise<{ id: string }>;
 }
 
+export const revalidate = 86400;
+
 export async function generateStaticParams() {
   const ids = await listAllPoliticianIds();
   return ids.map((id) => ({ id: String(id) }));

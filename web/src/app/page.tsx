@@ -10,6 +10,8 @@ export const metadata: Metadata = {
     "Criminal cases self-declared by Lok Sabha MPs in their ECI affidavits.",
 };
 
+export const revalidate = 86400;
+
 interface PageProps {
   searchParams: Promise<{
     party?: string;
