@@ -4,6 +4,8 @@ import { QueryProvider } from "@/providers/QueryProvider";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { DialogueBubble } from "@/components/ui/DialogueBubble";
+import { ShareFab } from "@/components/ui/ShareFab";
+import { SITE_URL } from "@/lib/share";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -17,9 +19,24 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "NetaGirifiles — Track MP Criminal Records",
   description:
     "Civic transparency platform surfacing criminal cases declared by Indian MPs in their ECI election affidavits.",
+  openGraph: {
+    title: "NetaGirifiles — Track MP Criminal Records",
+    description:
+      "Explore criminal cases self-declared by Indian MPs in their ECI election affidavits.",
+    siteName: "NetaGirifiles",
+    type: "website",
+    url: SITE_URL,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "NetaGirifiles — Track MP Criminal Records",
+    description:
+      "Explore criminal cases self-declared by Indian MPs in their ECI election affidavits.",
+  },
 };
 
 export default function RootLayout({
@@ -46,6 +63,7 @@ export default function RootLayout({
           </main>
           <Footer />
           <DialogueBubble />
+          <ShareFab />
         </QueryProvider>
       </body>
     </html>

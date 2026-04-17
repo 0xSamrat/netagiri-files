@@ -4,6 +4,8 @@ import { getPoliticianById, listAllPoliticianIds } from "@/lib/queries/politicia
 import { ProfileHeader } from "@/components/politician/ProfileHeader";
 import { CaseBreakdown } from "@/components/politician/CaseBreakdown";
 import { ComparisonStats } from "@/components/politician/ComparisonStats";
+import { ShareRow } from "@/components/ui/ShareRow";
+import { SITE_URL } from "@/lib/share";
 import Link from "next/link";
 
 interface PageProps {
@@ -23,9 +25,25 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (isNaN(id)) return {};
   const p = await getPoliticianById(id);
   if (!p) return {};
+  const title = `${p.name} — NetaGirifiles`;
+  const description = `${p.name} (${p.party_short_name ?? "IND"}, ${p.constituency ?? p.state_name}) has declared ${p.total_cases} criminal case${p.total_cases !== 1 ? "s" : ""} in their ECI affidavit.`;
+  const url = `${SITE_URL}/politician/${id}`;
   return {
-    title: `${p.name} — NetaGirifiles`,
-    description: `${p.name} (${p.party_short_name ?? "IND"}, ${p.constituency ?? p.state_name}) has declared ${p.total_cases} criminal case${p.total_cases !== 1 ? "s" : ""} in their ECI affidavit.`,
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      title,
+      description,
+      url,
+      siteName: "NetaGirifiles",
+      type: "profile",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
   };
 }
 
@@ -57,6 +75,19 @@ export default async function PoliticianPage({ params }: PageProps) {
       </nav>
 
       <ProfileHeader politician={politician} />
+
+      <div className="rounded-2xl border border-white/5 bg-[#0b0f23]/60 backdrop-blur-md px-4 py-3">
+        <ShareRow
+          url={`${SITE_URL}/politician/${politician.id}`}
+          title={`${politician.name} — NetaGirifiles`}
+          text={[
+            `⚖️ ${politician.name} (${politician.party_short_name ?? "IND"}${politician.constituency ? ` · ${politician.constituency}` : ""})`,
+            `📋 Total cases: ${politician.total_cases} · 🚨 Serious: ${politician.serious_cases}`,
+            `Source: ECI affidavit via NetaGirifiles`,
+          ].join("\n")}
+          label="Share this record"
+        />
+      </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
         <div className="lg:col-span-2">
