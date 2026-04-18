@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "About — NetaGirifiles",
   description:
     "Why NetaGirifiles exists, how it works, where the data comes from, and the constitutional basis for the voter's right to know.",
+  alternates: { canonical: "/about" },
 };
 
 export default function AboutPage() {

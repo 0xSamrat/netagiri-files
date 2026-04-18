@@ -108,20 +108,10 @@ export function DialogueBubble() {
           aria-live="polite"
           className="w-72 max-w-[calc(100vw-2rem)] rounded-2xl border border-white/5 bg-[#0b0f23]/95 backdrop-blur-md p-4 shadow-[0_8px_32px_rgba(0,0,0,0.4)] animate-in fade-in slide-in-from-bottom-2"
         >
-          <div className="flex items-center gap-2 mb-1">
-            <span className="text-[13px] font-semibold text-[#ff2d87] truncate">
-              {current.politician}
-            </span>
-            {current.party && (
-              <>
-                <span className="text-slate-700">·</span>
-                <span className="text-[10px] uppercase tracking-[0.18em] text-slate-500">
-                  {current.party}
-                </span>
-              </>
-            )}
+          <div className="text-[10px] uppercase tracking-[0.18em] text-[#ff2d87] font-semibold mb-1">
+            Famous parliamentary dialogue
           </div>
-          <p className="text-[12px] text-slate-300 leading-snug mb-3 line-clamp-3">
+          <p className="text-[13px] text-slate-200 leading-snug mb-3 line-clamp-3">
             &ldquo;{current.quote}&rdquo;
           </p>
           <div className="flex items-center gap-2">
@@ -141,7 +131,7 @@ export function DialogueBubble() {
       <button
         type="button"
         onClick={handleClick}
-        aria-label="Play a random famous Indian politician dialogue"
+        aria-label="Play a random famous parliamentary dialogue"
         className="group relative h-14 w-14 rounded-full border border-[#ff2d87]/40 bg-[#0b0f23] shadow-[0_0_24px_rgba(255,45,135,0.35)] transition-transform hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ff2d87] focus-visible:ring-offset-2 focus-visible:ring-offset-[#060814] motion-safe:animate-[pulse_3s_ease-in-out_infinite]"
       >
         <span className="absolute inset-0 rounded-full bg-[#ff2d87]/10 motion-safe:animate-ping motion-reduce:hidden" />

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 import { QueryProvider } from "@/providers/QueryProvider";
@@ -19,24 +19,83 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+export const viewport: Viewport = {
+  themeColor: "#060814",
+  width: "device-width",
+  initialScale: 1,
+};
+
+const DESC =
+  "Explore cases Indian MPs declared in their ECI election affidavits — by party, state, or individual. Source: myneta.info.";
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "NetaGirifiles — Track MP Criminal Records",
-  description:
-    "Civic transparency platform surfacing criminal cases declared by Indian MPs in their ECI election affidavits.",
+  title: {
+    default: "NetaGirifiles — The public record behind your MP",
+    template: "%s · NetaGirifiles",
+  },
+  description: DESC,
+  applicationName: "NetaGirifiles",
+  keywords: [
+    "Indian MPs",
+    "Lok Sabha",
+    "election affidavits",
+    "MP criminal cases",
+    "ECI affidavits",
+    "myneta",
+    "ADR",
+    "civic transparency",
+    "voter right to know",
+    "Indian politicians",
+  ],
+  authors: [{ name: "Samrat Mukherjee", url: "https://github.com/0xSamrat" }],
+  creator: "Samrat Mukherjee",
+  publisher: "NetaGirifiles",
+  alternates: { canonical: SITE_URL },
   openGraph: {
-    title: "NetaGirifiles — Track MP Criminal Records",
-    description:
-      "Explore criminal cases self-declared by Indian MPs in their ECI election affidavits.",
+    title: "NetaGirifiles — The public record behind your MP",
+    description: DESC,
     siteName: "NetaGirifiles",
     type: "website",
     url: SITE_URL,
+    locale: "en_IN",
   },
   twitter: {
     card: "summary_large_image",
-    title: "NetaGirifiles — Track MP Criminal Records",
-    description:
-      "Explore criminal cases self-declared by Indian MPs in their ECI election affidavits.",
+    title: "NetaGirifiles — The public record behind your MP",
+    description: DESC,
+    creator: "@0x_samrat",
+    site: "@0x_samrat",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+    },
+  },
+  category: "news",
+};
+
+const WEBSITE_JSONLD = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "NetaGirifiles",
+  url: SITE_URL,
+  description: DESC,
+  inLanguage: "en-IN",
+  publisher: {
+    "@type": "Organization",
+    name: "NetaGirifiles",
+    url: SITE_URL,
+  },
+  potentialAction: {
+    "@type": "SearchAction",
+    target: `${SITE_URL}/lok-sabha?party={search_term_string}`,
+    "query-input": "required name=search_term_string",
   },
 };
 
@@ -51,6 +110,12 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-[#060814] text-slate-200">
+        <Script
+          id="ld-website"
+          type="application/ld+json"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(WEBSITE_JSONLD) }}
+        />
         <Script id="ms-clarity" strategy="afterInteractive">
           {`(function(c,l,a,r,i,t,y){
             c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};

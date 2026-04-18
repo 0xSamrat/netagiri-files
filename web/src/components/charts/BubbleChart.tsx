@@ -447,7 +447,7 @@ export function BubbleChart({
       <div className="pointer-events-none absolute top-4 left-5 flex items-center gap-2 z-10">
         <span className="h-1.5 w-1.5 rounded-full bg-[#ff2d87] animate-pulse" />
         <span className="text-[10px] uppercase tracking-[0.2em] text-slate-400 font-semibold">
-          Criminal cases by party
+          Declared cases by party
         </span>
       </div>
       <div className="pointer-events-none absolute top-4 right-5 z-10 text-[10px] uppercase tracking-[0.18em] text-slate-500">

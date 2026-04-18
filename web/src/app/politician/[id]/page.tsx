@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const p = await getPoliticianById(id);
   if (!p) return {};
   const title = `${p.name} — NetaGirifiles`;
-  const description = `${p.name} (${p.party_short_name ?? "IND"}, ${p.constituency ?? p.state_name}) has declared ${p.total_cases} criminal case${p.total_cases !== 1 ? "s" : ""} in their ECI affidavit.`;
+  const description = `${p.name} (${p.party_short_name ?? "IND"}, ${p.constituency ?? p.state_name}) declared ${p.total_cases} case${p.total_cases !== 1 ? "s" : ""} in their ECI affidavit.`;
   const url = `${SITE_URL}/politician/${id}`;
   return {
     title,
@@ -57,9 +57,54 @@ export default async function PoliticianPage({ params }: PageProps) {
 
   const houseLabel = "Lok Sabha";
   const houseHref = "/lok-sabha";
+  const canonical = `${SITE_URL}/politician/${politician.id}`;
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        name: politician.name,
+        url: canonical,
+        jobTitle: "Member of Parliament, Lok Sabha",
+        affiliation: politician.party_name
+          ? { "@type": "Organization", name: politician.party_name }
+          : undefined,
+        address: politician.state_name
+          ? {
+              "@type": "PostalAddress",
+              addressRegion: politician.state_name,
+              addressCountry: "IN",
+            }
+          : undefined,
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Lok Sabha",
+            item: `${SITE_URL}/lok-sabha`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: politician.name,
+            item: canonical,
+          },
+        ],
+      },
+    ],
+  };
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-5">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <nav className="text-[11px] uppercase tracking-wider text-slate-500 flex items-center gap-2">
         <Link href="/" className="hover:text-[#ff2d87] transition-colors">
           Home
@@ -82,7 +127,7 @@ export default async function PoliticianPage({ params }: PageProps) {
           title={`${politician.name} — NetaGirifiles`}
           text={[
             `⚖️ ${politician.name} (${politician.party_short_name ?? "IND"}${politician.constituency ? ` · ${politician.constituency}` : ""})`,
-            `📋 Total cases: ${politician.total_cases} · 🚨 Serious: ${politician.serious_cases}`,
+            `📄 Declared cases: ${politician.total_cases} · Serious: ${politician.serious_cases}`,
             `Source: ECI affidavit via NetaGirifiles`,
           ].join("\n")}
           label="Share this record"

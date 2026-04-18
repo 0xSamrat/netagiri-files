@@ -78,7 +78,7 @@ export function ProfileHeader({ politician: p }: ProfileHeaderProps) {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           <Stat label="Constituency" value={p.constituency ?? "—"} />
           <Stat
-            label="Criminal Cases"
+            label="Declared Cases"
             value={String(p.total_cases)}
             highlight={p.total_cases > 0}
           />

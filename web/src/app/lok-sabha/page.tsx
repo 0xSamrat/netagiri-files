@@ -7,7 +7,8 @@ import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 export const metadata: Metadata = {
   title: "Lok Sabha — NetaGirifiles",
   description:
-    "Criminal cases self-declared by Lok Sabha MPs in their ECI affidavits.",
+    "Cases declared by Lok Sabha MPs in their ECI affidavits.",
+  alternates: { canonical: "/lok-sabha" },
 };
 
 export const revalidate = 86400;
@@ -41,8 +42,8 @@ export default async function LokSabhaPage({ searchParams }: PageProps) {
               Lok Sabha 2024
             </h1>
             <p className="text-xs text-slate-500 mt-1 max-w-xl">
-              Criminal cases self-declared by Members of Parliament in their
-              ECI election affidavits.
+              Cases declared by Members of Parliament in their ECI election
+              affidavits.
             </p>
           </div>
         </div>

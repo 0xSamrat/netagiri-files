@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Disclaimer — NetaGirifiles",
   description:
     "Legal disclaimer, data source, scope of information, presumption of innocence, and corrections policy for NetaGirifiles.",
+  alternates: { canonical: "/disclaimer" },
 };
 
 export default function DisclaimerPage() {

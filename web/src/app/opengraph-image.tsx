@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "NetaGirifiles — Criminal records of Indian MPs";
+export const alt = "NetaGirifiles — The public record behind your elected MP";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -64,12 +64,11 @@ export default async function Image() {
               maxWidth: 960,
             }}
           >
-            Know the{" "}
-            <span style={{ color: "#ff2d87" }}>criminal record</span> of your
-            elected MP.
+            The <span style={{ color: "#ff2d87" }}>public record</span> behind
+            your elected MP.
           </div>
           <div style={{ fontSize: 26, color: "#cbd5e1", maxWidth: 960 }}>
-            Explore cases self-declared by Indian MPs in their ECI affidavits.
+            Explore cases Indian MPs declared in their ECI affidavits.
           </div>
         </div>
         <div style={{ fontSize: 20, color: "#94a3b8" }}>

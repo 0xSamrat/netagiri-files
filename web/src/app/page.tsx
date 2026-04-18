@@ -3,9 +3,10 @@ import type { Metadata } from "next";
 import { getPartyStats, getStateStats } from "@/lib/queries/stats";
 
 export const metadata: Metadata = {
-  title: "NetaGirifiles — Criminal records of Indian MPs",
+  title: "NetaGirifiles — The public record behind your elected MP",
   description:
-    "Explore criminal cases self-declared by Lok Sabha MPs in their ECI affidavits — by party, by state, by person.",
+    "Explore cases Lok Sabha MPs declared in their ECI affidavits — by party, by state, or by person.",
+  alternates: { canonical: "/" },
 };
 
 export const revalidate = 86400;
@@ -65,16 +66,15 @@ export default async function HomePage() {
             </span>
           </div>
           <h1 className="text-3xl sm:text-5xl font-bold text-white mt-4 leading-tight max-w-3xl">
-            Know the{" "}
-            <span className="text-[#ff2d87]">criminal record</span> of your
-            elected MP.
+            The <span className="text-[#ff2d87]">public record</span> behind
+            your elected MP.
           </h1>
           <p
             className="relative text-sm sm:text-base mt-4 max-w-2xl leading-relaxed"
             style={{ color: "#e2e8f0" }}
           >
-            NetaGirifiles aggregates the criminal cases that India&apos;s Members of
-            Parliament <span className="text-white font-semibold">self-declared</span> in
+            NetaGirifiles aggregates the cases that India&apos;s Members of
+            Parliament <span className="text-white font-semibold">declared on oath</span> in
             their Election Commission affidavits. Explore by party, by state,
             or by individual — the data is public, we just make it easier to
             see.
@@ -118,7 +118,7 @@ export default async function HomePage() {
             value={mpsWithCases.toLocaleString()}
             accent
           />
-          <HeadlineStat label="% Flagged" value={`${nationalPct}%`} accent />
+          <HeadlineStat label="% With Cases" value={`${nationalPct}%`} accent />
           <HeadlineStat
             label="Total Cases"
             value={totalCases.toLocaleString()}

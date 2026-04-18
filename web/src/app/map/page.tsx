@@ -6,7 +6,8 @@ import { MapView } from "./MapView";
 export const metadata: Metadata = {
   title: "India Map — NetaGirifiles",
   description:
-    "Hex-grid map showing the percentage of Lok Sabha MPs with declared criminal cases, by state.",
+    "Hex-grid map showing the percentage of Lok Sabha MPs with declared cases, by state.",
+  alternates: { canonical: "/map" },
 };
 
 export const revalidate = 86400;
@@ -37,7 +38,7 @@ export default async function MapPage() {
             <h1 className="text-2xl font-bold text-white mt-1">India Map</h1>
             <p className="text-xs text-slate-500 mt-1 max-w-xl">
               Percentage of elected Lok Sabha MPs (2024) who have declared
-              criminal cases in their ECI affidavit. Click a state for details.
+              cases in their ECI affidavit. Click a state for details.
             </p>
           </div>
         </div>

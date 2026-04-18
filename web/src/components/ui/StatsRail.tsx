@@ -111,7 +111,7 @@ export function StatsRail({
           </span>
         </div>
         <div className="text-[10px] text-slate-500 mb-3 relative">
-          Criminal case distribution by party
+          Declared cases by party
         </div>
 
         <div className="relative flex items-center justify-center">
@@ -168,7 +168,7 @@ export function StatsRail({
           </div>
           <div className="rounded-xl bg-[#ff2d87]/10 border border-[#ff2d87]/20 px-3 py-2">
             <div className="text-[9px] uppercase tracking-wider text-[#ff2d87]/80 font-semibold">
-              Flagged
+              With Cases
             </div>
             <div className="text-base font-bold text-white tabular-nums">
               {totals.withCases}

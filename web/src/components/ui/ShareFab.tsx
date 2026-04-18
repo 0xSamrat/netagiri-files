@@ -51,9 +51,9 @@ export function ShareFab() {
   const rootRef = useRef<HTMLDivElement | null>(null);
 
   const url = `${SITE_URL}${pathname}`;
-  const title = "NetaGirifiles — Criminal records of Indian MPs";
+  const title = "NetaGirifiles — The public record behind your elected MP";
   const text = [
-    "⚖️ NetaGirifiles — criminal cases self-declared by Indian MPs",
+    "⚖️ NetaGirifiles — cases Indian MPs declared in their election affidavits",
     "Explore by party, state, or individual. Source: ECI affidavits.",
   ].join("\n");
   const links = buildShareLinks({ url, title, text });

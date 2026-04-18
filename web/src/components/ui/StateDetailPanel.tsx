@@ -84,7 +84,7 @@ export function StateDetailPanel({ stat, onClose }: StateDetailPanelProps) {
       {/* Top MPs */}
       <div>
         <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider mb-2">
-          Top MPs by criminal cases
+          Top MPs by declared cases
         </p>
         {loading ? (
           <div className="space-y-2">
