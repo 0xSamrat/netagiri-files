@@ -165,7 +165,8 @@ export default async function PoliticianPage({ params }: PageProps) {
           myneta.info (ADR)
         </a>
         . Cases are self-declared; acquittals and dismissals may not be
-        reflected.
+        reflected. &ldquo;Serious&rdquo; cases follow the classification used
+        by ADR / National Election Watch.
       </p>
     </div>
   );

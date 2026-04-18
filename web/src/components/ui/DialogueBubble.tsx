@@ -125,6 +125,9 @@ export function DialogueBubble() {
               {fmt(progress)} / {fmt(duration)}
             </span>
           </div>
+          <div className="mt-2 text-[9px] italic text-slate-500">
+            Public-speech clip · used as commentary
+          </div>
         </div>
       )}
 

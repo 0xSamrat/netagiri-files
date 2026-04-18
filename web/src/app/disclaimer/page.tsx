@@ -202,7 +202,18 @@ export default function DisclaimerPage() {
         </p>
       </Section>
 
-      <Section title="11. Liability">
+      <Section title="11. Governing law and jurisdiction">
+        <p>
+          This disclaimer and any disputes arising out of or in connection
+          with the use of NetaGirifiles shall be governed by and construed in
+          accordance with the laws of the Republic of India. The courts at{" "}
+          <span className="text-white">Kolkata, West Bengal</span> shall have
+          exclusive jurisdiction over any such dispute, subject to the
+          applicable rules on personal jurisdiction and cause of action.
+        </p>
+      </Section>
+
+      <Section title="12. Liability">
         <p>
           NetaGirifiles is a volunteer project offered &ldquo;as is&rdquo;
           without warranty of any kind. To the maximum extent permitted by
@@ -217,7 +228,14 @@ export default function DisclaimerPage() {
           For corrections or legal notices
         </h3>
         <p className="text-sm text-slate-400">
-          Please reach out through the channels listed on our{" "}
+          Email:{" "}
+          <a
+            href="mailto:samrat.mukherjee2022@gmail.com"
+            className="text-[#ff2d87] hover:text-white underline underline-offset-2"
+          >
+            samrat.mukherjee2022@gmail.com
+          </a>
+          . Additional channels are listed on our{" "}
           <Link
             href="/about"
             className="text-[#ff2d87] hover:text-white underline underline-offset-2"

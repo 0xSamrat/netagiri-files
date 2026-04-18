@@ -67,12 +67,6 @@ export const DIALOGUES: Dialogue[] = [
     durationSec: 10,
   },
   {
-    id: "file-nahi-padhti",
-    quote: "Main file nahi padhti!",
-    file: "main-file-nahi-padhti.mp3",
-    durationSec: 8,
-  },
-  {
     id: "loksabha",
     quote: "A Lok Sabha moment",
     file: "on-lokshava.mp3",

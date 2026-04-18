@@ -43,7 +43,8 @@ export default async function LokSabhaPage({ searchParams }: PageProps) {
             </h1>
             <p className="text-xs text-slate-500 mt-1 max-w-xl">
               Cases declared by Members of Parliament in their ECI election
-              affidavits.
+              affidavits. &ldquo;Serious&rdquo; cases follow the classification
+              used by ADR / National Election Watch.
             </p>
           </div>
         </div>
