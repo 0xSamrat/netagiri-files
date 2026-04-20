@@ -124,7 +124,7 @@ export function StateDetailPanel({ stat, onClose }: StateDetailPanelProps) {
 
       {/* View all link */}
       <Link
-        href={`/?state=${stat.code}`}
+        href={`/lok-sabha?state=${stat.code}`}
         className="block text-center text-xs text-[#ff2d87] hover:text-white font-medium pt-1"
       >
         View all MPs from {stat.name} →
