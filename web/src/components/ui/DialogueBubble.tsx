@@ -7,12 +7,27 @@ import type { Dialogue } from "@/data/dialogues";
 
 type PlayState = "idle" | "playing" | "paused";
 
+const TOOLTIPS = [
+  "seriously, don't.",
+  "you're not ready.",
+  "volume up first.",
+  "last warning.",
+  "only if you're alone.",
+  "press once. trust me.",
+  "not for meetings.",
+];
+
+const PSST_STORAGE_KEY = "ngf-psst-seen";
+
 export function DialogueBubble() {
   const [current, setCurrent] = useState<Dialogue | null>(null);
   const [state, setState] = useState<PlayState>("idle");
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   const [toastVisible, setToastVisible] = useState(false);
+  const [tooltip, setTooltip] = useState<string>(TOOLTIPS[0]);
+  const [psstVisible, setPsstVisible] = useState(false);
+  const [psstBounce, setPsstBounce] = useState(false);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const lastIdRef = useRef<string | undefined>(undefined);
@@ -79,6 +94,30 @@ export function DialogueBubble() {
   }, []);
 
   useEffect(() => {
+    setTooltip(TOOLTIPS[Math.floor(Math.random() * TOOLTIPS.length)]);
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    try {
+      if (localStorage.getItem(PSST_STORAGE_KEY)) return;
+    } catch {}
+    const showTimer = setTimeout(() => {
+      setPsstVisible(true);
+      setPsstBounce(true);
+      try {
+        localStorage.setItem(PSST_STORAGE_KEY, "1");
+      } catch {}
+      setTimeout(() => setPsstBounce(false), 700);
+    }, 8000);
+    const hideTimer = setTimeout(() => setPsstVisible(false), 11000);
+    return () => {
+      clearTimeout(showTimer);
+      clearTimeout(hideTimer);
+    };
+  }, []);
+
+  useEffect(() => {
     return () => {
       if (dismissTimerRef.current) clearTimeout(dismissTimerRef.current);
       audioRef.current?.pause();
@@ -131,11 +170,25 @@ export function DialogueBubble() {
         </div>
       )}
 
+      {psstVisible && (
+        <div
+          className="pointer-events-none absolute bottom-16 right-0 rounded-xl bg-[#0b0f23] border border-[#ff2d87]/30 px-3 py-1.5 text-[12px] text-slate-200 shadow-[0_4px_16px_rgba(255,45,135,0.25)] animate-in fade-in slide-in-from-bottom-1"
+          aria-hidden="true"
+        >
+          psst.
+          <span className="absolute -bottom-1 right-5 h-2 w-2 rotate-45 bg-[#0b0f23] border-r border-b border-[#ff2d87]/30" />
+        </div>
+      )}
       <button
         type="button"
-        onClick={handleClick}
+        onClick={() => {
+          setPsstVisible(false);
+          handleClick();
+        }}
         aria-label="Play a random famous parliamentary dialogue"
-        className="group relative h-14 w-14 rounded-full border border-[#ff2d87]/40 bg-[#0b0f23] shadow-[0_0_24px_rgba(255,45,135,0.35)] transition-transform hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ff2d87] focus-visible:ring-offset-2 focus-visible:ring-offset-[#060814] motion-safe:animate-[pulse_3s_ease-in-out_infinite]"
+        className={`group relative h-14 w-14 rounded-full border border-[#ff2d87]/40 bg-[#0b0f23] shadow-[0_0_24px_rgba(255,45,135,0.35)] transition-transform hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ff2d87] focus-visible:ring-offset-2 focus-visible:ring-offset-[#060814] motion-safe:animate-[pulse_3s_ease-in-out_infinite] ${
+          psstBounce ? "motion-safe:animate-bounce" : ""
+        }`}
       >
         <span className="absolute inset-0 rounded-full bg-[#ff2d87]/10 motion-safe:animate-ping motion-reduce:hidden" />
         <span className="relative flex items-center justify-center h-full w-full text-[#ff2d87]">
@@ -162,13 +215,15 @@ export function DialogueBubble() {
               strokeLinejoin="round"
               aria-hidden="true"
             >
-              <path d="M3 11l18-8v18l-18-8v-2z" />
-              <path d="M11 11v4" />
+              <rect x="9" y="3" width="6" height="12" rx="3" />
+              <path d="M5 11a7 7 0 0 0 14 0" />
+              <line x1="12" y1="18" x2="12" y2="22" />
+              <line x1="9" y1="22" x2="15" y2="22" />
             </svg>
           )}
         </span>
         <span className="pointer-events-none absolute right-full mr-3 top-1/2 -translate-y-1/2 whitespace-nowrap rounded-md bg-[#0b0f23] border border-white/5 px-2 py-1 text-[11px] text-slate-300 opacity-0 group-hover:opacity-100 transition-opacity">
-          Hear them speak
+          {tooltip}
         </span>
       </button>
     </div>
